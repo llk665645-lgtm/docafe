@@ -25,7 +25,6 @@ export default defineNuxtConfig({
     ],
     defaultLocale: 'ru',
     strategy: 'prefix_except_default',
-    lazy: true,
     langDir: 'locales',
   }
 });
