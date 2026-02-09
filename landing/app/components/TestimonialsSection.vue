@@ -10,7 +10,7 @@
         </p>
       </div>
       <div class="mx-auto mt-16 flow-root max-w-2xl sm:mt-20 lg:mx-0 lg:max-w-none">
-        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
           <div v-for="testimonial in testimonials" :key="testimonial.author" class="rounded-2xl bg-brand-light p-8 text-sm leading-6 border border-gray-100">
             <blockquote class="text-brand-dark">
               <p>“{{ testimonial.body }}”</p>
@@ -42,11 +42,6 @@ const testimonials = [
     body: 'The analytics are game-changing. I know exactly when investors review our pitch deck.',
     author: 'Elena Rodriguez',
     role: 'Startup Founder'
-  },
-  {
-    body: 'Simple enough for our clients to use, but secure enough for our compliance team. Perfect balance.',
-    author: 'David Chen',
-    role: 'Wealth Manager'
   }
 ]
 </script>

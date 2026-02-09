@@ -3,7 +3,7 @@
     <HeroSection />
     <FeaturesSection />
     <StepsSection />
-    <TestimonialsSection />
+
     <CTASection />
     <AppFooter />
   </div>
@@ -13,7 +13,7 @@
 import HeroSection from '~/components/HeroSection.vue'
 import FeaturesSection from '~/components/FeaturesSection.vue'
 import StepsSection from '~/components/StepsSection.vue'
-import TestimonialsSection from '~/components/TestimonialsSection.vue'
+
 import CTASection from '~/components/CTASection.vue'
 import AppFooter from '~/components/AppFooter.vue'
 
