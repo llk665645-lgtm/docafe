@@ -3,9 +3,9 @@
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="mx-auto max-w-2xl lg:text-center">
         <h2 class="text-base font-semibold leading-7 text-brand-primary">Uncompromised Security</h2>
-        <p class="mt-2 text-3xl font-bold tracking-tight text-brand-dark sm:text-4xl">
-          Protect what matters most
-        </p>
+        <h2 class="mt-2 text-brand-dark sm:text-4xl text-3xl font-bold tracking-tight">
+          <ShinyText text="Protect what matters most" :speed="3" shimmerColor="rgba(0,0,0,0.2)" />
+        </h2>
         <p class="mt-6 text-lg leading-8 text-brand-gray">
           Maintain full ownership of your data with our advanced protection suite.
         </p>
@@ -32,6 +32,7 @@
 </template>
 
 <script setup lang="ts">
+import ShinyText from './ShinyText.vue'
 const features = [
   {
     name: 'Granular Access Control',

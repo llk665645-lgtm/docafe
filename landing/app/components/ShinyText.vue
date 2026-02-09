@@ -7,13 +7,15 @@ interface ShinyTextProps {
   disabled?: boolean;
   speed?: number;
   className?: string;
+  shimmerColor?: string;
 }
 
 const props = withDefaults(defineProps<ShinyTextProps>(), {
   text: '',
   disabled: false,
   speed: 5,
-  className: ''
+  className: '',
+  shimmerColor: 'rgba(255, 255, 255, 0.8)'
 });
 
 const animationDuration = computed(() => `${props.speed}s`);
@@ -21,13 +23,12 @@ const animationDuration = computed(() => `${props.speed}s`);
 
 <template>
   <div
-    :class="`text-[#b5b5b5a4] bg-clip-text inline-block ${!props.disabled ? 'animate-shine' : ''} ${props.className}`"
+    :class="`bg-clip-text inline-block ${!props.disabled ? 'animate-shine' : ''} ${props.className}`"
     :style="{
-      backgroundImage:
-        'linear-gradient(120deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 60%)',
+      backgroundImage: `linear-gradient(120deg, transparent 40%, ${props.shimmerColor} 50%, transparent 60%)`,
       backgroundSize: '200% 100%',
       WebkitBackgroundClip: 'text',
-      animationDuration: animationDuration
+      animationDuration: animationDuration,
     }"
   >
     {{ props.text }}

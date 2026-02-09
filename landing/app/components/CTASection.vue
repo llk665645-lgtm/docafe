@@ -3,8 +3,8 @@
     <div class="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
       <div class="mx-auto max-w-2xl text-center">
         <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-          Stop wondering where your data is.<br />
-          Take control today.
+          <ShinyText text="Stop wondering where your data is." :speed="3" class-name="block mb-1" />
+          <ShinyText text="Take control today." :speed="3" />
         </h2>
         <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-brand-light/90">
           Join 10,000+ organizations securing their critical documents with our platform.
@@ -23,5 +23,7 @@
 </template>
 
 <script setup lang="ts">
+
+import ShinyText from './ShinyText.vue'
 // CTA Section
 </script>
