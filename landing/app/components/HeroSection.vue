@@ -3,7 +3,7 @@
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
       <div class="mx-auto max-w-2xl text-center">
         <h1 class="text-4xl font-bold tracking-tight text-brand-dark sm:text-6xl">
-          <ShinyText text="Complete Control Over Your Sensitive Documents" :speed="3" shimmerColor="rgba(0,0,0,0.2)" />
+          Complete Control Over Your Sensitive Documents
         </h1>
         <p class="mt-6 text-lg leading-8 text-brand-gray">
           Securely share, track, and revoke access to your files instantly. 
@@ -23,7 +23,5 @@
 </template>
 
 <script setup lang="ts">
-
-import ShinyText from './ShinyText.vue'
 // HeroSection component
 </script>
