@@ -3,7 +3,7 @@
     <div
       v-for="item in trail"
       :key="item.id"
-      class="text-cursor-item absolute select-none will-change-transform text-3xl"
+      class="text-cursor-item absolute select-none animated-cursor will-change-transform text-3xl text-[#f7aaaa]"
       :ref="(el) => animateItem(el, item)"
     >
       {{ text }}
@@ -33,9 +33,10 @@ interface TrailItem {
 }
 
 const props = withDefaults(defineProps<TextCursorProps>(), {
-  text: '⚛️',
+  text: '♥',
   delay: 0.01,
   spacing: 30,
+
   followMouseDirection: true,
   randomFloat: true,
   exitDuration: 0.8,
