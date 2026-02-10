@@ -129,31 +129,32 @@ onUnmounted(() => {
     </div>
     <div class="mt-4 flex w-full items-center justify-between gap-4 pt-12 md:pt-0">
       <button
-        class="group/button flex size-7 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800"
+        class="group/button flex size-9 items-center justify-center rounded-full bg-[#460b13] shadow-md transition-all hover:scale-110 active:scale-95"
         @click="handlePrev"
       >
         <Icon
           name="lucide:arrow-left"
-          class="size-5 text-black transition-transform duration-300 group-hover/button:rotate-12 dark:text-neutral-400"
+          class="size-5 text-white transition-transform duration-300 group-hover/button:rotate-12"
         />
       </button>
 
       <!-- Name and Org -->
       <div class="flex flex-col items-center gap-1">
-        <span class="text-base italic">{{ testimonials.at(active)?.name }}</span>
-        <span class="text-sm italic">{{ testimonials.at(active)?.role }}</span>
+        <span class="text-base font-semibold text-zinc-900 dark:text-zinc-100">{{ testimonials.at(active)?.name }}</span>
+        <span class="text-sm text-zinc-500 dark:text-zinc-400 font-medium">{{ testimonials.at(active)?.role }}</span>
       </div>
 
       <button
-        class="group/button flex size-7 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800"
+        class="group/button flex size-9 items-center justify-center rounded-full bg-[#460b13] shadow-md transition-all hover:scale-110 active:scale-95"
         @click="handleNext"
       >
         <Icon
           name="lucide:arrow-right"
-          class="size-5 text-black transition-transform duration-300 group-hover/button:-rotate-12 dark:text-neutral-400"
+          class="size-5 text-white transition-transform duration-300 group-hover/button:-rotate-12"
         />
       </button>
     </div>
+
   </div>
 </template>
 

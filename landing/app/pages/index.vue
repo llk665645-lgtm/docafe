@@ -36,32 +36,33 @@ const testimonials = [
   {
     img: `https://randomuser.me/api/portraits/men/${getRandomNumber()}.jpg`,
     quote:
-      "Inspira UI is sleeker than my star cruiser. Launch-ready in seconds. Zero crashes, zero gravity.",
-    name: "Buzz Lightyear",
-    role: "Intergalactic Interface Command",
+      "The level of control we now have over our legal documents is unprecedented. Revoking access instantly has saved us from several potential data leaks.",
+    name: "James Morrison",
+    role: "Corporate Attorney, Morrison & Associates",
   },
   {
     img: `https://randomuser.me/api/portraits/women/${getRandomNumber()}.jpg`,
     quote:
-      "Clickin' around this thing feels like ridin' a horse with turbo boosters. Inspira’s got giddyup!",
-    name: "Jessie",
-    role: "Yeehaw Engagement & Barnyard UX",
+      "Knowing exactly when and where our pitch decks are being viewed gives us a huge advantage during fundraising. It's an essential tool for any startup.",
+    name: "Elena Rodriguez",
+    role: "Founder, FinTech Global",
   },
   {
     img: `https://randomuser.me/api/portraits/men/${getRandomNumber()}.jpg`,
     quote:
-      "I’ve seen some clunky UIs in my day... but this one? Smoother than a tumbleweed on Tuesday.",
-    name: "Woody",
-    role: "Sheriff",
+      "Security is non-negotiable in healthcare. This platform provides the encryption and tracking we need to stay compliant while remaining incredibly easy to use.",
+    name: "Dr. Sarah Chen",
+    role: "Chief of Medicine, Metro Health",
   },
   {
     img: `https://randomuser.me/api/portraits/men/${getRandomNumber()}.jpg`,
     quote:
-      "I was terrified. Then I clicked. Nothing exploded. Inspira UI is a safe space. I’m thriving.",
-    name: "Rex",
-    role: "Senior Panic Tester, Dinosaur Usability Lab",
+      "We share sensitive financial reports daily. The ability to set expiration dates and disable downloads ensures our data stays exactly where it belongs.",
+    name: "Marcus Thorne",
+    role: "CFO, Peak Capital",
   },
 ]
+
 
 useHead({
   title: 'Secure Document Sharing & Control',
