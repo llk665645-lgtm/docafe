@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-brand-light py-20 lg:py-32 overflow-hidden">
+  <section class="bg-brand-light pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
       <div class="mx-auto max-w-2xl text-center">
         <div class="flex justify-center">

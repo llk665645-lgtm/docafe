@@ -14,8 +14,10 @@
       </div>
     </section>
 
+    <PricingSection />
 
     <CTASection />
+
     <AppFooter />
   </div>
 </template>

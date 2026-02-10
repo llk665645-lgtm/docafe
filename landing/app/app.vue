@@ -1,5 +1,6 @@
 <template>
   <NuxtLayout>
+    <AppHeader />
     <TextCursor
       :delay="0.01"
       :spacing="80"
