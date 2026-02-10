@@ -129,7 +129,7 @@ onUnmounted(() => {
     </div>
     <div class="mt-4 flex w-full items-center justify-between gap-4 pt-12 md:pt-0">
       <button
-        class="group/button flex size-9 items-center justify-center rounded-full bg-[#460b13] shadow-md transition-all hover:scale-110 active:scale-95"
+        class="group/button flex size-9 items-center justify-center rounded-full bg-[#ba445b] shadow-md transition-all hover:scale-110 active:scale-95"
         @click="handlePrev"
       >
         <Icon
@@ -145,7 +145,7 @@ onUnmounted(() => {
       </div>
 
       <button
-        class="group/button flex size-9 items-center justify-center rounded-full bg-[#460b13] shadow-md transition-all hover:scale-110 active:scale-95"
+        class="group/button flex size-9 items-center justify-center rounded-full bg-[#ba445b] shadow-md transition-all hover:scale-110 active:scale-95"
         @click="handleNext"
       >
         <Icon
@@ -153,6 +153,7 @@ onUnmounted(() => {
           class="size-5 text-white transition-transform duration-300 group-hover/button:-rotate-12"
         />
       </button>
+
     </div>
 
   </div>
