@@ -1,163 +1,84 @@
 <template>
-  <p ref="rootRef" :class="['blur-text', className, 'flex', 'flex-wrap']">
-    <Motion
+  <p ref="rootRef" :class="[className, 'flex', 'flex-wrap']">
+    <span
       v-for="(segment, index) in elements"
-      :key="`${animationKey}-${index}`"
-      tag="span"
-      :initial="fromSnapshot"
-      :animate="inView ? getAnimateKeyframes() : fromSnapshot"
-      :transition="getTransition(index)"
-      :style="{
-        display: 'inline-block',
-        willChange: 'transform, filter, opacity'
-      }"
-      @animation-complete="() => handleAnimationComplete(index)"
+      :key="index"
+      class="inline-block opacity-0"
+      :ref="el => { if (el) letterRefs[index] = el as HTMLElement }"
     >
-      {{ segment === ' ' ? '\u00A0' : segment
-      }}{{ animateBy === 'words' && index < elements.length - 1 ? '\u00A0' : '' }}
-    </Motion>
+      {{ segment === ' ' ? '\u00A0' : segment }}
+      {{ animateBy === 'words' && index < elements.length - 1 ? '\u00A0' : '' }}
+    </span>
   </p>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, watch, useTemplateRef } from 'vue';
-import { Motion } from 'motion-v';
+import { ref, computed, onMounted, watch } from 'vue';
+import gsap from 'gsap';
 
 type AnimateBy = 'words' | 'letters';
-type Direction = 'top' | 'bottom';
-type AnimationSnapshot = Record<string, string | number>;
 
 interface BlurTextProps {
   text?: string;
   delay?: number;
   className?: string;
   animateBy?: AnimateBy;
-  direction?: Direction;
   threshold?: number;
-  rootMargin?: string;
-  animationFrom?: AnimationSnapshot;
-  animationTo?: AnimationSnapshot[];
-  easing?: (t: number) => number;
   onAnimationComplete?: () => void;
-  stepDuration?: number;
 }
 
 const props = withDefaults(defineProps<BlurTextProps>(), {
   text: '',
-  delay: 200,
+  delay: 200, // Initial delay before animation starts
   className: '',
-  animateBy: 'words' as AnimateBy,
-  direction: 'top' as Direction,
+  animateBy: 'words',
   threshold: 0.1,
-  rootMargin: '0px',
-  easing: (t: number) => t,
-  stepDuration: 0.35
 });
 
-const buildKeyframes = (
-  from: AnimationSnapshot,
-  steps: AnimationSnapshot[]
-): Record<string, Array<string | number>> => {
-  const keys = new Set<string>([...Object.keys(from), ...steps.flatMap(step => Object.keys(step))]);
-
-  const keyframes: Record<string, Array<string | number>> = {};
-
-  for (const key of keys) {
-    keyframes[key] = [from[key], ...steps.map(step => step[key])];
+const elements = computed(() => {
+  if (props.animateBy === 'words') {
+    return props.text.split(' ');
   }
+  return props.text.split('');
+});
 
-  return keyframes;
-};
-
-const elements = computed(() => (props.animateBy === 'words' ? props.text.split(' ') : props.text.split('')));
-
-const defaultFrom = computed<AnimationSnapshot>(() =>
-  props.direction === 'top' ? { filter: 'blur(10px)', opacity: 0, y: -50 } : { filter: 'blur(10px)', opacity: 0, y: 50 }
-);
-
-const defaultTo = computed<AnimationSnapshot[]>(() => [
-  {
-    filter: 'blur(5px)',
-    opacity: 0.5,
-    y: props.direction === 'top' ? 5 : -5
-  },
-  {
-    filter: 'blur(0px)',
-    opacity: 1,
-    y: 0
-  }
-]);
-
-const fromSnapshot = computed(() => props.animationFrom ?? defaultFrom.value);
-const toSnapshots = computed(() => props.animationTo ?? defaultTo.value);
-
-const stepCount = computed(() => toSnapshots.value.length + 1);
-const totalDuration = computed(() => props.stepDuration * (stepCount.value - 1));
-const times = computed(() =>
-  Array.from({ length: stepCount.value }, (_, i) => (stepCount.value === 1 ? 0 : i / (stepCount.value - 1)))
-);
-
-const inView = ref(false);
-const animationKey = ref(0);
-const completionFired = ref(false);
-const rootRef = useTemplateRef<HTMLParagraphElement>('rootRef');
-
-let observer: IntersectionObserver | null = null;
-
-const setupObserver = () => {
-  if (!rootRef.value) return;
-
-  observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        inView.value = true;
-        observer?.unobserve(rootRef.value as Element);
-      }
-    },
-    {
-      threshold: props.threshold,
-      rootMargin: props.rootMargin
-    }
-  );
-
-  observer.observe(rootRef.value);
-};
-
-const getAnimateKeyframes = () => {
-  return buildKeyframes(fromSnapshot.value, toSnapshots.value);
-};
-
-const getTransition = (index: number) => {
-  return {
-    duration: totalDuration.value,
-    times: times.value,
-    delay: (index * props.delay) / 1000,
-    ease: props.easing
-  };
-};
-
-const handleAnimationComplete = (index: number) => {
-  if (index === elements.value.length - 1 && !completionFired.value && props.onAnimationComplete) {
-    completionFired.value = true;
-    props.onAnimationComplete();
-  }
-};
+const rootRef = ref<HTMLElement | null>(null);
+const letterRefs = ref<HTMLElement[]>([]);
 
 onMounted(() => {
-  setupObserver();
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        animateText();
+        observer.unobserve(entry.target);
+      }
+    },
+    { threshold: props.threshold }
+  );
+
+  if (rootRef.value) {
+    observer.observe(rootRef.value);
+  }
 });
 
-onUnmounted(() => {
-  observer?.disconnect();
-});
+const animateText = () => {
+  gsap.to(letterRefs.value, {
+    opacity: 1,
+    duration: 0.8,
+    ease: 'power2.out',
+    stagger: 0.1,
+    delay: props.delay / 1000,
+    onComplete: () => {
+      if (props.onAnimationComplete) {
+        props.onAnimationComplete();
+      }
+    }
+  });
+};
 
-watch([() => props.threshold, () => props.rootMargin], () => {
-  observer?.disconnect();
-  setupObserver();
-});
-
-watch([() => props.delay, () => props.stepDuration, () => props.animateBy, () => props.direction], () => {
-  animationKey.value++;
-  completionFired.value = false;
+watch(() => props.text, () => {
+  // Reset opacity if text changes and re-animate? 
+  // For now, simpler implementation assumes text is static or component remounts.
+  // If dynamic, we'd need to kill tweens and restart.
 });
 </script>
