@@ -4,7 +4,7 @@
     :class="{ 'border-border/50 bg-white/90': scrolled }"
   >
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex h-20 items-center justify-between">
+      <div class="grid h-20 grid-cols-2 md:grid-cols-[1fr_auto_1fr] items-center">
         <!-- Logo -->
         <div class="flex items-center gap-2">
           <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ba445b] text-white shadow-lg">
@@ -15,15 +15,15 @@
           </span>
         </div>
 
-        <!-- Desktop Navigation -->
-        <nav class="hidden md:flex items-center gap-8">
-          <a v-for="link in navLinks" :key="link.href" :href="link.href" class="text-sm font-medium text-brand-gray hover:text-[#ba445b] transition-colors">
+        <!-- Desktop Navigation - Perfectly Centered -->
+        <nav class="hidden md:flex items-center justify-center gap-8 px-4">
+          <a v-for="link in navLinks" :key="link.href" :href="link.href" class="text-sm font-medium text-brand-gray hover:text-[#ba445b] transition-colors whitespace-nowrap">
             {{ link.label }}
           </a>
         </nav>
 
         <!-- CTA Action -->
-        <div class="flex items-center gap-4">
+        <div class="flex items-center justify-end gap-4">
           <button 
             class="hidden sm:block text-sm font-semibold text-brand-dark hover:text-[#ba445b] transition-colors"
             @click="openAuth('register')"
@@ -57,7 +57,6 @@
         >
           {{ link.label }}
         </a>
-
         <hr class="border-border/50" />
         <button 
           class="w-full rounded-xl bg-[#ba445b] py-3 text-center font-bold text-white shadow-md"
@@ -68,12 +67,15 @@
       </nav>
     </div>
 
-    <!-- Auth Modal -->
-    <AuthModal 
-      :is-open="isAuthOpen" 
-      :initial-mode="authMode" 
-      @close="isAuthOpen = false" 
-    />
+    <!-- Auth Modal - Teleported to Body for perfect layout -->
+    <Teleport to="body">
+      <AuthModal 
+        :is-open="isAuthOpen" 
+        :initial-mode="authMode" 
+        @close="isAuthOpen = false" 
+      />
+    </Teleport>
+
   </header>
 </template>
 
