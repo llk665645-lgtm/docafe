@@ -27,34 +27,34 @@
         <div class="px-8 py-10">
           <div class="mb-8 text-center">
             <h2 class="text-3xl font-bold tracking-tight text-brand-dark">
-              {{ isLogin ? 'Welcome Back' : 'Join the Community' }}
+              {{ isLogin ? $t('auth.login.title') : $t('auth.register.title') }}
             </h2>
             <p class="mt-2 text-sm text-brand-gray">
-              {{ isLogin ? 'Sign in to access your personalized wisdom' : 'Start your journey to daily inspiration' }}
+              {{ isLogin ? $t('auth.login.subtitle') : $t('auth.register.subtitle') }}
             </p>
           </div>
 
           <form @submit.prevent="handleSubmit" class="space-y-4">
             <div v-if="!isLogin" class="space-y-1">
-              <label class="text-xs font-bold uppercase tracking-wider text-brand-gray ml-1">Full Name</label>
+              <label class="text-xs font-bold uppercase tracking-wider text-brand-gray ml-1">{{ $t('auth.form.fullName') }}</label>
               <input 
                 type="text" 
-                placeholder="Mindful Soul"
+                :placeholder="$t('auth.form.fullNamePlaceholder')"
                 class="w-full rounded-xl border border-border bg-brand-light/50 px-4 py-3 text-sm transition-all focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none"
               />
             </div>
 
             <div class="space-y-1">
-              <label class="text-xs font-bold uppercase tracking-wider text-brand-gray ml-1">Email Address</label>
+              <label class="text-xs font-bold uppercase tracking-wider text-brand-gray ml-1">{{ $t('auth.form.email') }}</label>
               <input 
                 type="email" 
-                placeholder="you@example.com"
+                :placeholder="$t('auth.form.emailPlaceholder')"
                 class="w-full rounded-xl border border-border bg-brand-light/50 px-4 py-3 text-sm transition-all focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none"
               />
             </div>
 
             <div class="space-y-1">
-              <label class="text-xs font-bold uppercase tracking-wider text-brand-gray ml-1">Password</label>
+              <label class="text-xs font-bold uppercase tracking-wider text-brand-gray ml-1">{{ $t('auth.form.password') }}</label>
               <input 
                 type="password" 
                 placeholder="••••••••"
@@ -66,20 +66,20 @@
               type="submit"
               class="group relative w-full overflow-hidden rounded-xl bg-primary py-4 text-sm font-bold text-white shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
-              <span class="relative z-10">{{ isLogin ? 'Sign In' : 'Create Account' }}</span>
+              <span class="relative z-10">{{ isLogin ? $t('auth.login.submit') : $t('auth.register.submit') }}</span>
               <div class="absolute inset-0 -z-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
             </button>
           </form>
 
           <div class="mt-8 flex items-center justify-center gap-2 text-sm">
             <span class="text-brand-gray">
-              {{ isLogin ? "Don't have an account?" : "Already have an account?" }}
+              {{ isLogin ? $t('auth.login.switch') : $t('auth.register.switch') }}
             </span>
             <button 
               class="font-bold text-primary hover:underline"
               @click="isLogin = !isLogin"
             >
-              {{ isLogin ? 'Sign up' : 'Log in' }}
+              {{ isLogin ? $t('auth.login.action') : $t('auth.register.action') }}
             </button>
           </div>
         </div>
@@ -88,7 +88,7 @@
         <div class="bg-brand-light/50 border-t border-border px-8 py-6">
           <div class="flex items-center gap-3">
              <div class="h-px flex-1 bg-border" />
-             <span class="text-[10px] font-bold uppercase tracking-widest text-brand-gray">Or continue with</span>
+             <span class="text-[10px] font-bold uppercase tracking-widest text-brand-gray">{{ $t('auth.form.social') }}</span>
              <div class="h-px flex-1 bg-border" />
           </div>
           <div class="mt-4 grid grid-cols-2 gap-3">

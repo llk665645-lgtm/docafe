@@ -290,5 +290,60 @@
         "description": "Join 50,000+ people who start their day with MoodQuotes.",
         "button": "Get Started for Free",
         "link": "See how it works"
+    },
+    "footer": {
+        "about": "About",
+        "features": "Features",
+        "pricing": "Pricing",
+        "contact": "Contact",
+        "privacy": "Privacy",
+        "rights": "All rights reserved."
+    },
+    "auth": {
+        "login": {
+            "title": "Welcome Back",
+            "subtitle": "Sign in to access your personalized wisdom",
+            "submit": "Sign In",
+            "switch": "Don't have an account?",
+            "action": "Sign up"
+        },
+        "register": {
+            "title": "Join the Community",
+            "subtitle": "Start your journey to daily inspiration",
+            "submit": "Create Account",
+            "switch": "Already have an account?",
+            "action": "Log in"
+        },
+        "form": {
+            "fullName": "Full Name",
+            "fullNamePlaceholder": "Mindful Soul",
+            "email": "Email Address",
+            "emailPlaceholder": "you@example.com",
+            "password": "Password",
+            "social": "Or continue with"
+        }
+    },
+    "testimonials": {
+        "list": [
+            {
+                "quote": "This app literally changed my morning routine. Starting the day with a quote tailored to my mood gives me so much clarity.",
+                "name": "Alex Rivera",
+                "role": "Daily User"
+            },
+            {
+                "quote": "The 'Confidence' category helps me prep for big meetings. It's like having a life coach in my pocket.",
+                "name": "Sarah Jenkins",
+                "role": "Entrepreneur"
+            },
+            {
+                "quote": "I love generating these for my team. The AI really captures the right sentiment for every situation.",
+                "name": "Michael Chen",
+                "role": "Team Lead"
+            }
+        ]
+    },
+    "seo": {
+        "title": "MoodQuotes AI - Your Daily Inspiration",
+        "description": "Discover unique quotes tailored to your mood. Motivation, calm, and wisdom from the world's greatest minds at your fingertips."
     }
 }

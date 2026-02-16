@@ -7,18 +7,23 @@
         </div>
       </nav>
       <p class="mt-10 text-center text-xs leading-5 text-gray-400">
-        &copy; 2026 MoodQuotes AI. All rights reserved.
+        &copy; {{ new Date().getFullYear() }} MoodQuotes AI. {{ $t('footer.rights') }}
       </p>
     </div>
   </footer>
 </template>
 
 <script setup lang="ts">
-const navigation = [
-  { name: 'About', href: '#' },
-  { name: 'Features', href: '#features' },
-  { name: 'Pricing', href: '#' },
-  { name: 'Contact', href: '#' },
-  { name: 'Privacy', href: '#' },
-]
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
+const navigation = computed(() => [
+  { name: t('footer.about'), href: '#' },
+  { name: t('footer.features'), href: '#features' },
+  { name: t('footer.pricing'), href: '#pricing' },
+  { name: t('footer.contact'), href: '#' },
+  { name: t('footer.privacy'), href: '#' },
+])
 </script>
