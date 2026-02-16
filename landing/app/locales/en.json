@@ -345,5 +345,8 @@
     "seo": {
         "title": "MoodQuotes AI - Your Daily Inspiration",
         "description": "Discover unique quotes tailored to your mood. Motivation, calm, and wisdom from the world's greatest minds at your fingertips."
+    },
+    "flower": {
+        "nurturing": "Nurturing a new perspective..."
     }
 }

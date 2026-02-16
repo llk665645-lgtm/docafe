@@ -32,7 +32,7 @@
       </svg>
     </div>
     <div class="mt-6 text-brand-gray font-serif italic text-lg animate-pulse">
-      Nurturing a new perspective...
+      {{ $t('flower.nurturing') }}
     </div>
   </div>
 </template>

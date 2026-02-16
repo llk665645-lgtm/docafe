@@ -24,7 +24,9 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { rand } from "@vueuse/core"
 import HeroSection from '~/components/HeroSection.vue'
 import FeaturesSection from '~/components/FeaturesSection.vue'
 import StepsSection from '~/components/StepsSection.vue'
