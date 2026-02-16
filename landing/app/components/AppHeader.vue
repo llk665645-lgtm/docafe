@@ -8,7 +8,7 @@
         <!-- Logo -->
         <div class="flex items-center gap-2">
           <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white shadow-lg">
-            <Icon name="lucide:sparkles" class="size-6" />
+            <LogoIcon class="w-6 h-6 stroke-white fill-white" />
           </div>
           <span class="text-xl font-bold tracking-tight text-brand-dark">
             Story<span class="text-primary">Me</span>
