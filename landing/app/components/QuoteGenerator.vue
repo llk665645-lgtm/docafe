@@ -37,17 +37,43 @@
           <!-- Right Column (Themes) -->
           <div class="flex flex-col gap-4">
              <label class="text-sm font-bold text-brand-dark ml-1">{{ $t('generator.themeLabel') }}</label>
-             <div class="grid grid-cols-2 gap-3">
-                <button 
-                  v-for="(label, key) in themes" 
-                  :key="key"
-                  @click="form.theme = key"
-                  class="flex flex-col items-center gap-2 p-4 rounded-2xl border-2 transition-all group"
-                  :class="form.theme === key ? 'border-primary bg-primary/5' : 'border-brand-dark/5 hover:border-primary/20 hover:bg-brand-light'"
-                >
-                   <Icon :name="(themeIcons[key] as string)" class="size-8 transition-transform group-hover:scale-110" :class="form.theme === key ? 'text-primary' : 'text-brand-gray'" />
-                   <span class="text-xs font-bold uppercase tracking-wider" :class="form.theme === key ? 'text-primary' : 'text-brand-gray'">{{ label }}</span>
-                </button>
+             <div class="flex flex-col sm:flex-row gap-6">
+                <div class="grid grid-cols-2 gap-3 flex-1">
+                   <button 
+                     v-for="(label, key) in themes" 
+                     :key="key"
+                     @click="form.theme = key"
+                     class="flex flex-col items-center gap-2 p-4 rounded-2xl border-2 transition-all group"
+                     :class="form.theme === key ? 'border-primary bg-primary/5' : 'border-brand-dark/5 hover:border-primary/20 hover:bg-brand-light'"
+                   >
+                      <Icon :name="(themeIcons[key] as string)" class="size-8 transition-transform group-hover:scale-110" :class="form.theme === key ? 'text-primary' : 'text-brand-gray'" />
+                      <span class="text-[10px] font-bold uppercase tracking-wider text-center" :class="form.theme === key ? 'text-primary' : 'text-brand-gray'">{{ label }}</span>
+                   </button>
+                </div>
+                <!-- Theme Preview Card -->
+                <div class="hidden sm:block w-40 shrink-0">
+                   <div class="relative aspect-[4/5] rounded-2xl overflow-hidden border border-brand-dark/5 shadow-inner bg-brand-light group">
+                      <Transition
+                        enter-active-class="transition duration-500 ease-out"
+                        enter-from-class="opacity-0 scale-95"
+                        enter-to-class="opacity-100 scale-100"
+                        leave-active-class="transition duration-300 ease-in"
+                        leave-from-class="opacity-100 scale-100"
+                        leave-to-class="opacity-0 scale-95"
+                        mode="out-in"
+                      >
+                        <img 
+                          :key="form.theme"
+                          :src="`/images/themes/${form.theme}.webp`" 
+                          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                          :alt="String(form.theme)"
+                        />
+                      </Transition>
+                      <div class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/60 to-transparent">
+                         <span class="text-[10px] font-bold text-white uppercase tracking-widest">{{ (themes as any)[form.theme] }}</span>
+                      </div>
+                   </div>
+                </div>
              </div>
 
              <!-- Price / Action -->
