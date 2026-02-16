@@ -11,7 +11,7 @@
             <Icon name="lucide:sparkles" class="size-6" />
           </div>
           <span class="text-xl font-bold tracking-tight text-brand-dark">
-            Hire<span class="text-primary">Flow</span> AI
+            Story<span class="text-primary">Me</span>
           </span>
         </div>
 
