@@ -17,24 +17,43 @@
 
         <!-- Desktop Navigation - Perfectly Centered -->
         <nav class="hidden md:flex items-center justify-center gap-8 px-4">
-          <a v-for="link in navLinks" :key="link.href" :href="link.href" class="text-sm font-medium text-brand-gray hover:text-primary transition-colors whitespace-nowrap">
-            {{ link.label }}
+          <a href="#features" class="text-sm font-medium text-brand-gray hover:text-primary transition-colors whitespace-nowrap">
+            {{ $t('header.features') }}
+          </a>
+          <a href="#how-it-works" class="text-sm font-medium text-brand-gray hover:text-primary transition-colors whitespace-nowrap">
+            {{ $t('header.howItWorks') }}
+          </a>
+          <a href="#pricing" class="text-sm font-medium text-brand-gray hover:text-primary transition-colors whitespace-nowrap">
+            {{ $t('header.pricing') }}
           </a>
         </nav>
 
         <!-- CTA Action -->
-        <div class="flex items-center justify-end gap-4">
+        <div class="flex items-center justify-end gap-3">
+          <!-- Language Switcher -->
+          <div class="hidden sm:flex items-center bg-brand-light/50 rounded-lg p-1 border border-border/30">
+            <button 
+              v-for="locale in ['en', 'ru']" 
+              :key="locale"
+              @click="setLocale(locale as any)"
+              class="px-2 py-1 text-[10px] font-bold uppercase transition-all rounded"
+              :class="currentLocale === locale ? 'bg-primary text-white shadow-sm' : 'text-brand-gray/60 hover:text-primary'"
+            >
+              {{ locale }}
+            </button>
+          </div>
+
           <button 
             class="hidden sm:block text-sm font-semibold text-brand-dark hover:text-primary transition-colors"
-            @click="openAuth('register')"
+            @click="openAuth('login')"
           >
-            Log in
+            {{ $t('header.login') }}
           </button>
           <button 
-            class="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:scale-105 active:scale-95"
+            class="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white shadow-md transition-all hover:scale-105 active:scale-95"
             @click="openAuth('register')"
           >
-            Get Started
+            {{ $t('header.getStarted') }}
           </button>
           
           <!-- Mobile Menu Toggle -->
@@ -48,21 +67,37 @@
     <!-- Mobile Navigation -->
     <div v-if="isMenuOpen" class="md:hidden border-t border-border/50 bg-white px-4 py-6 shadow-xl animate-in fade-in slide-in-from-top-4 duration-300">
       <nav class="flex flex-col gap-4">
-        <a 
-          v-for="link in navLinks" 
-          :key="link.href" 
-          :href="link.href" 
-          class="text-base font-medium text-brand-gray hover:text-primary"
-          @click="isMenuOpen = false"
-        >
-          {{ link.label }}
+        <a href="#features" class="text-base font-medium text-brand-gray hover:text-primary" @click="isMenuOpen = false">
+          {{ $t('header.features') }}
         </a>
-        <hr class="border-border/50" />
+        <a href="#how-it-works" class="text-base font-medium text-brand-gray hover:text-primary" @click="isMenuOpen = false">
+          {{ $t('header.howItWorks') }}
+        </a>
+        <a href="#pricing" class="text-base font-medium text-brand-gray hover:text-primary" @click="isMenuOpen = false">
+          {{ $t('header.pricing') }}
+        </a>
+
+        <div class="flex items-center gap-2 mt-2">
+          <span class="text-xs text-brand-gray font-medium uppercase">Language:</span>
+          <div class="flex gap-2">
+            <button 
+              v-for="locale in ['en', 'ru']" 
+              :key="locale"
+              @click="setLocale(locale as any)"
+              class="px-3 py-1 text-xs font-bold uppercase border border-border rounded-lg"
+              :class="currentLocale === locale ? 'bg-primary text-white border-primary' : 'text-brand-gray bg-white'"
+            >
+              {{ locale }}
+            </button>
+          </div>
+        </div>
+
+        <hr class="border-border/50 my-2" />
         <button 
           class="w-full rounded-xl bg-primary py-3 text-center font-bold text-white shadow-md"
           @click="openAuth('register')"
         >
-          Get Started
+          {{ $t('header.getStarted') }}
         </button>
       </nav>
     </div>
@@ -80,25 +115,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t, locale: currentLocale, setLocale } = useI18n();
 
 const scrolled = ref(false);
 const isMenuOpen = ref(false);
 const isAuthOpen = ref(false);
 const authMode = ref<'login' | 'register'>('register');
 
-const navLinks = [
-  { label: 'Features', href: '#features' },
-  { label: 'How it works', href: '#how-it-works' },
-  { label: 'Pricing', href: '#pricing' },
-];
-
 const openAuth = (mode: 'login' | 'register') => {
   authMode.value = mode;
   isAuthOpen.value = true;
   isMenuOpen.value = false;
 };
-
 
 const handleScroll = () => {
   scrolled.value = window.scrollY > 20;

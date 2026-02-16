@@ -2,22 +2,19 @@
   <section id="features" class="bg-white py-24 sm:py-32">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="mx-auto max-w-2xl lg:text-center">
-        <h2 class="text-base font-semibold leading-7 text-primary uppercase tracking-widest">Why MoodQuotes?</h2>
+        <h2 class="text-base font-semibold leading-7 text-primary uppercase tracking-widest">{{ $t('features.title') }}</h2>
         <div class="flex justify-center mt-2">
             <p class="text-3xl font-bold tracking-tight text-brand-dark sm:text-4xl text-center justify-center">
-              Elevate your daily mindset
+              {{ $t('features.subtitle') }}
             </p>
         </div>
-        <p class="mt-6 text-lg leading-8 text-brand-gray">
-          Harness the power of timeless wisdom to find the perfect words for any moment.
-        </p>
       </div>
       <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
         <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
-          <div v-for="feature in features" :key="feature.name" class="flex flex-col">
+          <div v-for="(feature, index) in featureList" :key="index" class="flex flex-col">
             <dt class="flex items-center gap-x-3 text-base font-semibold leading-7 text-brand-dark">
               <div class="h-12 w-12 flex items-center justify-center rounded-2xl bg-primary/10">
-                 <Icon :name="feature.icon" class="h-6 w-6 text-primary" />
+                 <Icon :name="featureIcons[index] || 'lucide:sparkles'" class="h-6 w-6 text-primary" />
               </div>
               {{ feature.name }}
             </dt>
@@ -32,24 +29,14 @@
 </template>
 
 <script setup lang="ts">
-const features = [
-  {
-    name: 'Personalized Wisdom',
-    description:
-      'Timeless insights adapted to your situation. Whether you need a push to start your day or a gentle word to end it, discover what resonates with you.',
-    icon: 'lucide:brain-circuit'
-  },
-  {
-    name: 'Mood-Sync Technology',
-    description:
-      'Select your current emotion and get content that resonates. From deep motivation to peaceful mindfulness.',
-    icon: 'lucide:palette'
-  },
-  {
-    name: 'Visual Creator',
-    description:
-      'Transform any quote into a stunning, shareable social media post with our built-in designer.',
-    icon: 'lucide:image'
-  },
-]
+import { useI18n } from 'vue-i18n'
+const { tm } = useI18n()
+
+interface Feature {
+  name: string
+  description: string
+}
+
+const featureList = computed(() => tm('features.list') as Feature[])
+const featureIcons = ['lucide:brain-circuit', 'lucide:palette', 'lucide:image']
 </script>

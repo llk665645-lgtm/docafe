@@ -16,6 +16,16 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/fonts',
     '@nuxt/image',
-    '@nuxt/icon'
-  ]
+    '@nuxt/icon',
+    '@nuxtjs/i18n'
+  ],
+  i18n: {
+    locales: [
+      { code: 'en', name: 'English', file: 'en.json' },
+      { code: 'ru', name: 'Русский', file: 'ru.json' }
+    ],
+    lazy: true,
+    defaultLocale: 'en',
+    strategy: 'no_prefix'
+  }
 });

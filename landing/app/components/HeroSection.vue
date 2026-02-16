@@ -7,12 +7,11 @@
             ref="titleRef"
             class="text-5xl font-bold tracking-tight text-brand-dark sm:text-7xl text-center justify-center mb-6 opacity-0"
           >
-            Your Daily Dose of <br class="hidden sm:block" /> <span class="text-primary italic">Inspiration</span>
+            {{ $t('hero.titlePrefix') }} <br class="hidden sm:block" /> <span class="text-primary italic">{{ $t('hero.titleItalic') }}</span>
           </h1>
         </div>
         <p ref="descriptionRef" class="mt-6 text-xl leading-8 text-brand-gray opacity-0 max-w-2xl mx-auto">
-          Timeless wisdom from the world's greatest minds, uniquely selected for your current state of mind. 
-          Transform your mood into actionable inspiration.
+          {{ $t('hero.description') }}
         </p>
         
         <div ref="generatorRef" class="opacity-0">

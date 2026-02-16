@@ -1,0 +1,294 @@
+{
+    "header": {
+        "pricing": "Pricing",
+        "features": "Features",
+        "howItWorks": "How it works",
+        "login": "Login",
+        "getStarted": "Get Started"
+    },
+    "hero": {
+        "titlePrefix": "Your Daily Dose of",
+        "titleItalic": "Inspiration",
+        "description": "Timeless wisdom from the world's greatest minds, uniquely selected for your current state of mind. Transform your mood into actionable inspiration."
+    },
+    "generator": {
+        "moods": {
+            "motivation": "Motivation",
+            "inspiration": "Inspiration",
+            "calm": "Calm",
+            "confidence": "Confidence",
+            "love": "Love"
+        },
+        "findingWisdom": "Finding Wisdom...",
+        "revealQuote": "Reveal My Quote",
+        "wisdomOfGreats": "Wisdom of the Greats",
+        "saveAsImage": "Save as Image",
+        "share": "Share",
+        "copyText": "Copy Text",
+        "quotes": {
+            "motivation": [
+                {
+                    "text": "It does not matter how slowly you go as long as you do not stop.",
+                    "author": "Confucius"
+                },
+                {
+                    "text": "The only way to do great work is to love what you do.",
+                    "author": "Steve Jobs"
+                },
+                {
+                    "text": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+                    "author": "Winston Churchill"
+                },
+                {
+                    "text": "What you get by achieving your goals is not as important as what you become by achieving your goals.",
+                    "author": "Zig Ziglar"
+                },
+                {
+                    "text": "Doubt kills more dreams than failure ever will.",
+                    "author": "Suzy Kassem"
+                },
+                {
+                    "text": "Hardships often prepare ordinary people for an extraordinary destiny.",
+                    "author": "C.S. Lewis"
+                },
+                {
+                    "text": "The secret of getting ahead is getting started.",
+                    "author": "Mark Twain"
+                },
+                {
+                    "text": "The way to get started is to quit talking and begin doing.",
+                    "author": "Walt Disney"
+                }
+            ],
+            "inspiration": [
+                {
+                    "text": "The best way to predict the future is to invent it.",
+                    "author": "Alan Kay"
+                },
+                {
+                    "text": "Everything you can imagine is real.",
+                    "author": "Pablo Picasso"
+                },
+                {
+                    "text": "The only limit to our realization of tomorrow will be our doubts of today.",
+                    "author": "Franklin D. Roosevelt"
+                },
+                {
+                    "text": "Life is what happens when you're busy making other plans.",
+                    "author": "John Lennon"
+                },
+                {
+                    "text": "I have no special talent. I am only passionately curious.",
+                    "author": "Albert Einstein"
+                },
+                {
+                    "text": "Nature never hurries, yet everything is accomplished.",
+                    "author": "Lao Tzu"
+                },
+                {
+                    "text": "Keep your face always toward the sunshine, and shadows will fall behind you.",
+                    "author": "Walt Whitman"
+                },
+                {
+                    "text": "To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.",
+                    "author": "Ralph Waldo Emerson"
+                }
+            ],
+            "calm": [
+                {
+                    "text": "Empty your mind, be formless, shapeless — like water.",
+                    "author": "Bruce Lee"
+                },
+                {
+                    "text": "Peace comes from within. Do not seek it without.",
+                    "author": "Buddha"
+                },
+                {
+                    "text": "The soul always knows what to do to heal itself. The challenge is to silence the mind.",
+                    "author": "Caroline Myss"
+                },
+                {
+                    "text": "He who is of a calm and happy nature will hardly feel the pressure of age.",
+                    "author": "Plato"
+                },
+                {
+                    "text": "The more tranquil a man becomes, the greater is his success, his influence, his power for good.",
+                    "author": "James Allen"
+                },
+                {
+                    "text": "Smile, breathe and go slowly.",
+                    "author": "Thich Nhat Hanh"
+                },
+                {
+                    "text": "Tension is who you think you should be. Relaxation is who you are.",
+                    "author": "Chinese Proverb"
+                },
+                {
+                    "text": "Within you, there is a stillness and a sanctuary to which you can retreat at any time and be yourself.",
+                    "author": "Hermann Hesse"
+                }
+            ],
+            "confidence": [
+                {
+                    "text": "Whether you think you can or you think you can't, you're right.",
+                    "author": "Henry Ford"
+                },
+                {
+                    "text": "No one can make you feel inferior without your consent.",
+                    "author": "Eleanor Roosevelt"
+                },
+                {
+                    "text": "With confidence, you have won before you have started.",
+                    "author": "Marcus Garvey"
+                },
+                {
+                    "text": "Believe in yourself! Have faith in your abilities!",
+                    "author": "Norman Vincent Peale"
+                },
+                {
+                    "text": "One important key to success is self-confidence. A key to self-confidence is preparation.",
+                    "author": "Arthur Ashe"
+                },
+                {
+                    "text": "Kindness in words creates confidence. Kindness in thinking creates profoundness. Kindness in giving creates love.",
+                    "author": "Lao Tzu"
+                },
+                {
+                    "text": "As soon as you trust yourself, you will know how to live.",
+                    "author": "Johann Wolfgang von Goethe"
+                },
+                {
+                    "text": "The most beautiful thing you can wear is confidence.",
+                    "author": "Blake Lively"
+                }
+            ],
+            "love": [
+                {
+                    "text": "Love all, trust a few, do wrong to none.",
+                    "author": "William Shakespeare"
+                },
+                {
+                    "text": "The greatest thing you'll ever learn is just to love and be loved in return.",
+                    "author": "Eden Ahbez"
+                },
+                {
+                    "text": "Where there is love there is life.",
+                    "author": "Mahatma Gandhi"
+                },
+                {
+                    "text": "Being deeply loved by someone gives you strength, while loving someone deeply gives you courage.",
+                    "author": "Lao Tzu"
+                },
+                {
+                    "text": "Love recognizes no barriers. It jumps hurdles, leaps fences, penetrates walls to arrive at its destination full of hope.",
+                    "author": "Maya Angelou"
+                },
+                {
+                    "text": "The best and most beautiful things in this world cannot be seen or even heard, but must be felt with the heart.",
+                    "author": "Helen Keller"
+                },
+                {
+                    "text": "If I know what love is, it is because of you.",
+                    "author": "Hermann Hesse"
+                },
+                {
+                    "text": "Darkness cannot drive out darkness: only light can do that. Hate cannot drive out hate: only love can do that.",
+                    "author": "Martin Luther King Jr."
+                }
+            ]
+        }
+    },
+    "features": {
+        "title": "Unleash Your Potential",
+        "subtitle": "Harness the power of timeless wisdom to find the perfect words for any moment.",
+        "list": [
+            {
+                "name": "Personalized Wisdom",
+                "description": "Timeless insights adapted to your situation. Whether you need a push to start your day or a gentle word to end it, discover what resonates with you."
+            },
+            {
+                "name": "Mood-Sync Technology",
+                "description": "Select your current emotion and get content that resonates. From deep motivation to peaceful mindfulness."
+            },
+            {
+                "name": "Visual Creator",
+                "description": "Transform any quote into a stunning, shareable social media post with our built-in designer."
+            }
+        ]
+    },
+    "steps": {
+        "title": "The Path to Enlightenment",
+        "subtitle": "Three simple steps to connect with the wisdom of the ages.",
+        "list": [
+            {
+                "title": "Pick your Vibe",
+                "description": "Select your current mood or goal—from motivation to peaceful mindfulness."
+            },
+            {
+                "title": "The Spark Emerges",
+                "description": "Our engine selects a unique quote tailored just for you from historical archives."
+            },
+            {
+                "title": "Share the Spark",
+                "description": "Download your quote as a beautiful image or share it directly with your community."
+            }
+        ]
+    },
+    "pricing": {
+        "title": "Pricing",
+        "subtitle": "Fuel your inspiration every day",
+        "description": "Start for free and upgrade when you need more personalized wisdom.",
+        "mostPopular": "Best Value",
+        "perMonth": "/month",
+        "tiers": [
+            {
+                "name": "Free Spirit",
+                "price": "$0",
+                "description": "Perfect for casual inspiration and daily wisdom.",
+                "features": [
+                    "5 daily quotes",
+                    "Basic mood selection",
+                    "Standard text-only copies",
+                    "Access to community favorites"
+                ],
+                "cta": "Start generating"
+            },
+            {
+                "name": "Inspired Soul",
+                "price": "$9",
+                "description": "For those who want to live an inspired life.",
+                "features": [
+                    "Unlimited quotes",
+                    "Advanced mood insights",
+                    "Visual image creator",
+                    "No watermarks on shares",
+                    "Saved favorites library",
+                    "Multiple language support"
+                ],
+                "cta": "Get Inspired Now",
+                "mostPopular": true
+            },
+            {
+                "name": "Master Creator",
+                "price": "$29",
+                "description": "Full creative control for bloggers and influencers.",
+                "features": [
+                    "Bulk image generation",
+                    "Custom branding setup",
+                    "API access for your apps",
+                    "Priority mood rendering",
+                    "Commercial usage rights",
+                    "Dedicated style requests"
+                ],
+                "cta": "Contact for Platinum"
+            }
+        ]
+    },
+    "cta": {
+        "title": "Ready to change your mindset?",
+        "subtitle": "Start your journey today.",
+        "description": "Join 50,000+ people who start their day with MoodQuotes.",
+        "button": "Get Started for Free",
+        "link": "See how it works"
+    }
+}
