@@ -39,5 +39,11 @@ interface Feature {
 }
 
 const featureList = computed(() => tm('features.list') as Feature[])
-const featureIcons = ['lucide:brain-circuit', 'lucide:palette', 'lucide:image']
+const featureIcons = [
+  'lucide:zap', 
+  'lucide:users', 
+  'lucide:cpu', 
+  'lucide:smartphone', 
+  'lucide:copy-check'
+]
 </script>

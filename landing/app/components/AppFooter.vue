@@ -7,7 +7,7 @@
         </div>
       </nav>
       <p class="mt-10 text-center text-xs leading-5 text-gray-400">
-        &copy; {{ new Date().getFullYear() }} MoodQuotes AI. {{ $t('footer.rights') }}
+        &copy; {{ new Date().getFullYear() }} QuoteShot. {{ $t('footer.rights') }}
       </p>
     </div>
   </footer>

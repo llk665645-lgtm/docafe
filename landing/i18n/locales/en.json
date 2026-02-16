@@ -7,9 +7,9 @@
         "getStarted": "Get Started"
     },
     "hero": {
-        "titlePrefix": "Your Daily Dose of",
-        "titleItalic": "Inspiration",
-        "description": "Timeless wisdom from the world's greatest minds, uniquely selected for your current state of mind. Transform your mood into actionable inspiration."
+        "titlePrefix": "Your Instant",
+        "titleItalic": "Posts",
+        "description": "Enter a topic — get a ready-to-post meme, quote, and design in one click. Perfect for Telegram and Instagram."
     },
     "generator": {
         "moods": {
@@ -19,12 +19,12 @@
             "confidence": "Confidence",
             "love": "Love"
         },
-        "findingWisdom": "Finding Wisdom...",
-        "revealQuote": "Reveal My Quote",
-        "wisdomOfGreats": "Wisdom of the Greats",
-        "saveAsImage": "Save as Image",
-        "share": "Share",
-        "copyText": "Copy Text",
+        "findingWisdom": "Creating post...",
+        "revealQuote": "Generate Post",
+        "wisdomOfGreats": "Wisdom & Humor",
+        "saveAsImage": "Download Post",
+        "share": "To Telegram",
+        "copyText": "Copy",
         "quotes": {
             "motivation": [
                 {
@@ -34,262 +34,134 @@
                 {
                     "text": "The only way to do great work is to love what you do.",
                     "author": "Steve Jobs"
-                },
-                {
-                    "text": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
-                    "author": "Winston Churchill"
-                },
-                {
-                    "text": "What you get by achieving your goals is not as important as what you become by achieving your goals.",
-                    "author": "Zig Ziglar"
-                },
-                {
-                    "text": "Doubt kills more dreams than failure ever will.",
-                    "author": "Suzy Kassem"
-                },
-                {
-                    "text": "Hardships often prepare ordinary people for an extraordinary destiny.",
-                    "author": "C.S. Lewis"
-                },
-                {
-                    "text": "The secret of getting ahead is getting started.",
-                    "author": "Mark Twain"
-                },
-                {
-                    "text": "The way to get started is to quit talking and begin doing.",
-                    "author": "Walt Disney"
                 }
             ],
             "inspiration": [
                 {
                     "text": "The best way to predict the future is to invent it.",
                     "author": "Alan Kay"
-                },
-                {
-                    "text": "Everything you can imagine is real.",
-                    "author": "Pablo Picasso"
-                },
-                {
-                    "text": "The only limit to our realization of tomorrow will be our doubts of today.",
-                    "author": "Franklin D. Roosevelt"
-                },
-                {
-                    "text": "Life is what happens when you're busy making other plans.",
-                    "author": "John Lennon"
-                },
-                {
-                    "text": "I have no special talent. I am only passionately curious.",
-                    "author": "Albert Einstein"
-                },
-                {
-                    "text": "Nature never hurries, yet everything is accomplished.",
-                    "author": "Lao Tzu"
-                },
-                {
-                    "text": "Keep your face always toward the sunshine, and shadows will fall behind you.",
-                    "author": "Walt Whitman"
-                },
-                {
-                    "text": "To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.",
-                    "author": "Ralph Waldo Emerson"
                 }
             ],
             "calm": [
                 {
                     "text": "Empty your mind, be formless, shapeless — like water.",
                     "author": "Bruce Lee"
-                },
-                {
-                    "text": "Peace comes from within. Do not seek it without.",
-                    "author": "Buddha"
-                },
-                {
-                    "text": "The soul always knows what to do to heal itself. The challenge is to silence the mind.",
-                    "author": "Caroline Myss"
-                },
-                {
-                    "text": "He who is of a calm and happy nature will hardly feel the pressure of age.",
-                    "author": "Plato"
-                },
-                {
-                    "text": "The more tranquil a man becomes, the greater is his success, his influence, his power for good.",
-                    "author": "James Allen"
-                },
-                {
-                    "text": "Smile, breathe and go slowly.",
-                    "author": "Thich Nhat Hanh"
-                },
-                {
-                    "text": "Tension is who you think you should be. Relaxation is who you are.",
-                    "author": "Chinese Proverb"
-                },
-                {
-                    "text": "Within you, there is a stillness and a sanctuary to which you can retreat at any time and be yourself.",
-                    "author": "Hermann Hesse"
                 }
             ],
             "confidence": [
                 {
                     "text": "Whether you think you can or you think you can't, you're right.",
                     "author": "Henry Ford"
-                },
-                {
-                    "text": "No one can make you feel inferior without your consent.",
-                    "author": "Eleanor Roosevelt"
-                },
-                {
-                    "text": "With confidence, you have won before you have started.",
-                    "author": "Marcus Garvey"
-                },
-                {
-                    "text": "Believe in yourself! Have faith in your abilities!",
-                    "author": "Norman Vincent Peale"
-                },
-                {
-                    "text": "One important key to success is self-confidence. A key to self-confidence is preparation.",
-                    "author": "Arthur Ashe"
-                },
-                {
-                    "text": "Kindness in words creates confidence. Kindness in thinking creates profoundness. Kindness in giving creates love.",
-                    "author": "Lao Tzu"
-                },
-                {
-                    "text": "As soon as you trust yourself, you will know how to live.",
-                    "author": "Johann Wolfgang von Goethe"
-                },
-                {
-                    "text": "The most beautiful thing you can wear is confidence.",
-                    "author": "Blake Lively"
                 }
             ],
             "love": [
                 {
                     "text": "Love all, trust a few, do wrong to none.",
                     "author": "William Shakespeare"
-                },
-                {
-                    "text": "The greatest thing you'll ever learn is just to love and be loved in return.",
-                    "author": "Eden Ahbez"
-                },
-                {
-                    "text": "Where there is love there is life.",
-                    "author": "Mahatma Gandhi"
-                },
-                {
-                    "text": "Being deeply loved by someone gives you strength, while loving someone deeply gives you courage.",
-                    "author": "Lao Tzu"
-                },
-                {
-                    "text": "Love recognizes no barriers. It jumps hurdles, leaps fences, penetrates walls to arrive at its destination full of hope.",
-                    "author": "Maya Angelou"
-                },
-                {
-                    "text": "The best and most beautiful things in this world cannot be seen or even heard, but must be felt with the heart.",
-                    "author": "Helen Keller"
-                },
-                {
-                    "text": "If I know what love is, it is because of you.",
-                    "author": "Hermann Hesse"
-                },
-                {
-                    "text": "Darkness cannot drive out darkness: only light can do that. Hate cannot drive out hate: only love can do that.",
-                    "author": "Martin Luther King Jr."
                 }
             ]
         }
     },
     "features": {
-        "title": "Unleash Your Potential",
-        "subtitle": "Harness the power of timeless wisdom to find the perfect words for any moment.",
+        "title": "Why QuoteShot?",
+        "subtitle": "Everything you need for perfect social media content.",
         "list": [
             {
-                "name": "Personalized Wisdom",
-                "description": "Timeless insights adapted to your situation. Whether you need a push to start your day or a gentle word to end it, discover what resonates with you."
+                "name": "Ready-to-post in 1 Click",
+                "description": "Enter a topic → get a meme + quote + visual, ready for publication."
             },
             {
-                "name": "Mood-Sync Technology",
-                "description": "Select your current emotion and get content that resonates. From deep motivation to peaceful mindfulness."
+                "name": "Audience-Tailored Trends",
+                "description": "Humor and motivation for teens and students, current trends and local culture."
             },
             {
-                "name": "Visual Creator",
-                "description": "Transform any quote into a stunning, shareable social media post with our built-in designer."
+                "name": "Automatic Combination",
+                "description": "AI selects text, jokes, and backgrounds; no manual editing needed."
+            },
+            {
+                "name": "Mobile & Instant",
+                "description": "Get posts directly in Telegram, Instagram, or download in seconds."
+            },
+            {
+                "name": "Template Reusability",
+                "description": "Generate multiple posts in the same style quickly and easily."
             }
         ]
     },
     "steps": {
-        "title": "The Path to Enlightenment",
-        "subtitle": "Three simple steps to connect with the wisdom of the ages.",
+        "title": "Simple Process",
+        "subtitle": "Three steps to viral content.",
         "list": [
             {
-                "title": "Pick your Vibe",
-                "description": "Select your current mood or goal—from motivation to peaceful mindfulness."
+                "title": "Enter Topic",
+                "description": "Just type what you want the post to be about or pick a mood."
             },
             {
-                "title": "The Spark Emerges",
-                "description": "Our engine selects a unique quote tailored just for you from historical archives."
+                "title": "AI Creation",
+                "description": "QuoteShot picks the perfect mix of humor, wisdom, and design."
             },
             {
-                "title": "Share the Spark",
-                "description": "Download your quote as a beautiful image or share it directly with your community."
+                "title": "Publish",
+                "description": "Send to social media with one tap or save to your gallery."
             }
         ]
     },
     "pricing": {
         "title": "Pricing",
-        "subtitle": "Fuel your inspiration every day",
-        "description": "Start for free and upgrade when you need more personalized wisdom.",
-        "mostPopular": "Best Value",
-        "perMonth": "/month",
+        "subtitle": "Fuel Your Feed",
+        "description": "Start for free and upgrade to PRO for unlimited creativity.",
+        "mostPopular": "Most Popular",
+        "perMonth": "/mo",
         "tiers": [
             {
-                "name": "Free Spirit",
+                "name": "Free",
                 "price": "$0",
-                "description": "Perfect for casual inspiration and daily wisdom.",
+                "description": "For personal use and daily inspiration.",
                 "features": [
-                    "5 daily quotes",
-                    "Basic mood selection",
-                    "Standard text-only copies",
-                    "Access to community favorites"
+                    "5 posts per day",
+                    "Basic templates",
+                    "Standard AI",
+                    "QuoteShot Watermark"
                 ],
-                "cta": "Start generating"
+                "cta": "Start for Free"
             },
             {
-                "name": "Inspired Soul",
+                "name": "Creator",
                 "price": "$9",
-                "description": "For those who want to live an inspired life.",
+                "description": "For bloggers and social media managers.",
                 "features": [
-                    "Unlimited quotes",
-                    "Advanced mood insights",
-                    "Visual image creator",
-                    "No watermarks on shares",
-                    "Saved favorites library",
-                    "Multiple language support"
+                    "Unlimited posts",
+                    "Advanced memes",
+                    "Access to all backgrounds",
+                    "No watermarks",
+                    "Cloud storage",
+                    "Telegram Priority"
                 ],
-                "cta": "Get Inspired Now",
+                "cta": "Become a Creator",
                 "mostPopular": true
             },
             {
-                "name": "Master Creator",
+                "name": "Pro",
                 "price": "$29",
-                "description": "Full creative control for bloggers and influencers.",
+                "description": "For agencies and teams.",
                 "features": [
-                    "Bulk image generation",
-                    "Custom branding setup",
-                    "API access for your apps",
-                    "Priority mood rendering",
-                    "Commercial usage rights",
-                    "Dedicated style requests"
+                    "Bulk generation",
+                    "Custom branding & templates",
+                    "API access",
+                    "Dedicated support",
+                    "Commercial rights",
+                    "Custom styles"
                 ],
-                "cta": "Contact for Platinum"
+                "cta": "Get Pro"
             }
         ]
     },
     "cta": {
-        "title": "Ready to change your mindset?",
-        "subtitle": "Start your journey today.",
-        "description": "Join 50,000+ people who start their day with MoodQuotes.",
+        "title": "Ready to own the feed?",
+        "subtitle": "Create your first post now.",
+        "description": "Join 50,000+ content creators with QuoteShot.",
         "button": "Get Started for Free",
-        "link": "See how it works"
+        "link": "See Examples"
     },
     "footer": {
         "about": "About",
@@ -302,51 +174,51 @@
     "auth": {
         "login": {
             "title": "Welcome Back",
-            "subtitle": "Sign in to access your personalized wisdom",
+            "subtitle": "Sign in to your QuoteShot account",
             "submit": "Sign In",
-            "switch": "Don't have an account?",
+            "switch": "No account?",
             "action": "Sign up"
         },
         "register": {
             "title": "Join the Community",
-            "subtitle": "Start your journey to daily inspiration",
+            "subtitle": "Start creating with QuoteShot",
             "submit": "Create Account",
             "switch": "Already have an account?",
             "action": "Log in"
         },
         "form": {
             "fullName": "Full Name",
-            "fullNamePlaceholder": "Mindful Soul",
+            "fullNamePlaceholder": "John Doe",
             "email": "Email Address",
             "emailPlaceholder": "you{'@'}example.com",
             "password": "Password",
-            "social": "Or continue with"
+            "social": "Or via"
         }
     },
     "testimonials": {
         "list": [
             {
-                "quote": "This app literally changed my morning routine. Starting the day with a quote tailored to my mood gives me so much clarity.",
+                "quote": "QuoteShot saves me hours of content creation. I just enter an idea, and the post is ready!",
                 "name": "Alex Rivera",
-                "role": "Daily User"
+                "role": "Blogger"
             },
             {
-                "quote": "The 'Confidence' category helps me prep for big meetings. It's like having a life coach in my pocket.",
+                "quote": "Best app for memes and quotes. Trends are always on point.",
                 "name": "Sarah Jenkins",
-                "role": "Entrepreneur"
+                "role": "SMM Manager"
             },
             {
-                "quote": "I love generating these for my team. The AI really captures the right sentiment for every situation.",
+                "quote": "My Telegram engagement doubled in a month thanks to QuoteShot.",
                 "name": "Michael Chen",
-                "role": "Team Lead"
+                "role": "Channel Owner"
             }
         ]
     },
     "seo": {
-        "title": "MoodQuotes AI - Your Daily Inspiration",
-        "description": "Discover unique quotes tailored to your mood. Motivation, calm, and wisdom from the world's greatest minds at your fingertips."
+        "title": "QuoteShot - AI Social Media Post Generator",
+        "description": "Create memes, quotes, and visuals in seconds with AI. Perfect for Instagram, Telegram, and youth audiences."
     },
     "flower": {
-        "nurturing": "Nurturing a new perspective..."
+        "nurturing": "Generating your masterpiece..."
     }
 }
