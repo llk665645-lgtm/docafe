@@ -27,6 +27,11 @@
         "saveAsImage": "Print",
         "share": "Copy",
         "copyText": "Share",
+        "showcase": {
+            "title": "Choose Your Fairytale World",
+            "subtitle": "Each theme is an entire universe with its own unique style and atmosphere",
+            "cta": "Create Story"
+        },
         "themes": {
             "forest": "Forest",
             "space": "Space",
