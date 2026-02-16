@@ -9,9 +9,7 @@
         <h2 class="text-3xl font-bold tracking-tight text-brand-dark sm:text-4xl">
           {{ $t('uniqueness.title') }}
         </h2>
-        <p class="mt-4 text-lg text-brand-gray">
-          {{ $t('uniqueness.subtitle') }}
-        </p>
+
       </div>
 
       <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">

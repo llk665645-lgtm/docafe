@@ -10,9 +10,7 @@
         <p class="mt-2 text-4xl font-bold tracking-tight text-brand-dark sm:text-5xl font-serif">
           {{ $t('generator.showcase.title') }}
         </p>
-        <p class="mt-6 text-lg leading-8 text-brand-gray">
-          {{ $t('generator.showcase.subtitle') }}
-        </p>
+
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
