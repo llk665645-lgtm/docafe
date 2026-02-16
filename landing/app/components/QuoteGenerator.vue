@@ -50,30 +50,7 @@
                       <span class="text-[10px] font-bold uppercase tracking-wider text-center" :class="form.theme === key ? 'text-primary' : 'text-brand-gray'">{{ label }}</span>
                    </button>
                 </div>
-                <!-- Theme Preview Card -->
-                <div class="hidden sm:block w-40 shrink-0">
-                   <div class="relative aspect-[4/5] rounded-2xl overflow-hidden border border-brand-dark/5 shadow-inner bg-brand-light group">
-                      <Transition
-                        enter-active-class="transition duration-500 ease-out"
-                        enter-from-class="opacity-0 scale-95"
-                        enter-to-class="opacity-100 scale-100"
-                        leave-active-class="transition duration-300 ease-in"
-                        leave-from-class="opacity-100 scale-100"
-                        leave-to-class="opacity-0 scale-95"
-                        mode="out-in"
-                      >
-                        <img 
-                          :key="form.theme"
-                          :src="`/images/themes/${form.theme}.webp`" 
-                          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                          :alt="String(form.theme)"
-                        />
-                      </Transition>
-                      <div class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/60 to-transparent">
-                         <span class="text-[10px] font-bold text-white uppercase tracking-widest">{{ (themes as any)[form.theme] }}</span>
-                      </div>
-                   </div>
-                </div>
+                <!-- Theme Preview Removed -->
              </div>
 
              <!-- Price / Action -->
@@ -123,28 +100,13 @@
              </div>
 
              <!-- Story Layout -->
-             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-                <!-- Illustration -->
-                <div class="relative aspect-square rounded-[2rem] overflow-hidden shadow-2xl border-[12px] border-white group/img transition-transform duration-700 hover:rotate-1">
-                   <div v-if="isGenerating" class="absolute inset-0 bg-brand-light z-10 flex flex-col items-center justify-center gap-4">
-                      <Icon name="svg-spinners:90-ring-with-bg" class="size-12 text-primary" />
-                      <span class="font-bold text-brand-gray animate-pulse">{{ $t('generator.findingVisual') }}</span>
-                   </div>
-                   <img 
-                     :src="result.image" 
-                     class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-1000"
-                     alt="Story Illustration"
-                   />
-                </div>
-
-                <!-- Text Content -->
-                <div class="flex flex-col gap-6">
-                   <div class="prose prose-brand max-w-none">
-                      <p class="text-xl leading-relaxed font-serif italic text-brand-dark first-letter:text-5xl first-letter:font-bold first-letter:mr-3 first-letter:float-left first-letter:text-primary whitespace-pre-wrap">
-                         {{ result.storyContent }}
-                      </p>
-                   </div>
-                </div>
+             <div class="flex flex-col gap-6">
+                 <!-- Illustration Removed -->
+                 <div class="prose prose-brand max-w-none">
+                    <p class="text-xl leading-relaxed font-serif italic text-brand-dark first-letter:text-5xl first-letter:font-bold first-letter:mr-3 first-letter:float-left first-letter:text-primary whitespace-pre-wrap">
+                       {{ result.storyContent }}
+                    </p>
+                 </div>
              </div>
 
              <!-- Footer Actions -->
