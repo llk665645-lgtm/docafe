@@ -40,7 +40,7 @@
           <span class="relative z-10 flex items-center gap-2">
             <Icon v-if="isGenerating" name="svg-spinners:90-ring-with-bg" class="size-5" />
             <Icon v-else name="lucide:sparkles" class="size-5" />
-            {{ isGenerating ? 'Generating Magic...' : 'Generate My Quote' }}
+            {{ isGenerating ? 'Finding Wisdom...' : 'Reveal My Quote' }}
           </span>
           <div 
             class="absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -59,24 +59,17 @@
         leave-to-class="opacity-0 scale-95"
       >
         <div v-if="generatedQuote" class="relative mt-8 p-12 rounded-4xl bg-white shadow-inner overflow-hidden min-h-[300px] flex flex-col items-center justify-center text-center">
-          <!-- Background Decor -->
-          <div 
-            class="absolute -top-24 -left-24 w-64 h-64 rounded-full blur-3xl opacity-20 animate-pulse"
-            :style="{ backgroundColor: currentMoodColor }"
-          />
-          <div 
-            class="absolute -bottom-24 -right-24 w-64 h-64 rounded-full blur-3xl opacity-20 animate-pulse"
-            :style="{ backgroundColor: currentMoodColor, animationDelay: '1s' }"
-          />
-
           <Icon name="lucide:quote" class="absolute top-8 left-8 size-12 opacity-10" :style="{ color: currentMoodColor }" />
           
           <blockquote class="relative z-10">
             <p class="text-3xl md:text-4xl font-serif italic text-brand-dark leading-snug">
               {{ generatedQuote.text }}
             </p>
-            <footer class="mt-6 text-brand-gray font-medium tracking-wide uppercase text-sm">
-              — AI-Generated Wisdom —
+            <footer class="mt-8 flex flex-col items-center gap-2">
+              <span class="text-xl font-bold text-brand-dark">— {{ generatedQuote.author }} —</span>
+              <span class="text-brand-gray font-medium tracking-wide uppercase text-[10px] opacity-60">
+                Wisdom of the Greats
+              </span>
             </footer>
           </blockquote>
 
@@ -111,6 +104,11 @@ interface Mood {
   color: string
 }
 
+interface Quote {
+  text: string
+  author: string
+}
+
 const moods: Mood[] = [
   { id: 'motivation', label: 'Motivation', icon: 'lucide:rocket', color: '#f43f5e' },
   { id: 'inspiration', label: 'Inspiration', icon: 'lucide:lightbulb', color: '#8b5cf6' },
@@ -121,43 +119,43 @@ const moods: Mood[] = [
 
 const selectedMood = ref<string>(moods[0]?.id || 'motivation')
 const isGenerating = ref(false)
-const generatedQuote = ref<{ text: string } | null>(null)
+const generatedQuote = ref<Quote | null>(null)
 
 const currentMoodColor = computed(() => {
   const mood = moods.find(m => m.id === selectedMood.value)
   return mood ? mood.color : '#ba445b'
 })
 
-const quotes: Record<string, string[]> = {
+const quotes: Record<string, Quote[]> = {
   motivation: [
-    "Your ambition is the fuel, your discipline is the engine.",
-    "Don't wait for opportunity. Create it with your own hands.",
-    "The distance between dreams and reality is called action.",
-    "Every morning you have two choices: continue to sleep with your dreams, or wake up and chase them."
+    { text: "It does not matter how slowly you go as long as you do not stop.", author: "Confucius" },
+    { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+    { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
+    { text: "What you get by achieving your goals is not as important as what you become by achieving your goals.", author: "Zig Ziglar" }
   ],
   inspiration: [
-    "The world is a canvas for your imagination. Paint it bright.",
-    "Small steps in the right direction can lead to the biggest changes.",
-    "Beauty is not in the destination, but in the way we see the journey.",
-    "Creativity is intelligence having fun."
+    { text: "The best way to predict the future is to invent it.", author: "Alan Kay" },
+    { text: "Everything you can imagine is real.", author: "Pablo Picasso" },
+    { text: "The only limit to our realization of tomorrow will be our doubts of today.", author: "Franklin D. Roosevelt" },
+    { text: "Life is what happens when you're busy making other plans.", author: "John Lennon" }
   ],
   calm: [
-    "In the middle of the storm, find the center of your soul.",
-    "Breathe. You are exactly where you need to be.",
-    "Quiet the mind, and the soul will speak.",
-    "Peace is not the absence of trouble, but the presence of stillness."
+    { text: "Empty your mind, be formless, shapeless — like water.", author: "Bruce Lee" },
+    { text: "Peace comes from within. Do not seek it without.", author: "Buddha" },
+    { text: "The soul always knows what to do to heal itself. The challenge is to silence the mind.", author: "Caroline Myss" },
+    { text: "He who is of a calm and happy nature will hardly feel the pressure of age.", author: "Plato" }
   ],
   confidence: [
-    "You are your only limit. Break through.",
-    "Believe you can and you're halfway there.",
-    "Confidence is not 'they will like me'. Confidence is 'I'll be fine if they don't'.",
-    "Owning your story is the bravest thing you'll ever do."
+    { text: "Whether you think you can or you think you can't, you're right.", author: "Henry Ford" },
+    { text: "No one can make you feel inferior without your consent.", author: "Eleanor Roosevelt" },
+    { text: "With confidence, you have won before you have started.", author: "Marcus Garvey" },
+    { text: "Believe in yourself! Have faith in your abilities!", author: "Norman Vincent Peale" }
   ],
   love: [
-    "Kindness is the language which the deaf can hear and the blind can see.",
-    "The best thing to hold onto in life is each other.",
-    "Love is not something you find. Love is something that finds you.",
-    "A single soul dwelling in two bodies."
+    { text: "Love all, trust a few, do wrong to none.", author: "William Shakespeare" },
+    { text: "The greatest thing you'll ever learn is just to love and be loved in return.", author: "Eden Ahbez" },
+    { text: "Where there is love there is life.", author: "Mahatma Gandhi" },
+    { text: "Being deeply loved by someone gives you strength, while loving someone deeply gives you courage.", author: "Lao Tzu" }
   ]
 }
 
@@ -165,15 +163,14 @@ async function generateQuote() {
   isGenerating.value = true
   generatedQuote.value = null
   
-  // Simulate AI delay
+  // Simulate AI selection/generation delay
   await new Promise(resolve => setTimeout(resolve, 1500))
   
   const moodQuotes = quotes[selectedMood.value] || []
-  const randomQuote = moodQuotes[Math.floor(Math.random() * moodQuotes.length)] || "Stay positive and keep moving forward."
+  const randomIndex = Math.floor(Math.random() * moodQuotes.length)
+  const selectedQuote = moodQuotes[randomIndex] || { text: "Stay positive and keep moving forward.", author: "Unknown" }
   
-  generatedQuote.value = {
-    text: randomQuote
-  }
+  generatedQuote.value = selectedQuote
   
   isGenerating.value = false
 }

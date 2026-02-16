@@ -11,8 +11,8 @@
           </h1>
         </div>
         <p ref="descriptionRef" class="mt-6 text-xl leading-8 text-brand-gray opacity-0 max-w-2xl mx-auto">
-          AI-powered quotes, uniquely crafted for your current state of mind. 
-          Transform your mood into actionable wisdom.
+          Timeless wisdom from the world's greatest minds, uniquely selected for your current state of mind. 
+          Transform your mood into actionable inspiration.
         </p>
         
         <div ref="generatorRef" class="opacity-0">

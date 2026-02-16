@@ -59,7 +59,7 @@ const tiers = [
     price: '$0',
     description: 'Perfect for casual inspiration and daily wisdom.',
     features: [
-      '5 AI quotes per day',
+      '5 daily quotes',
       'Basic mood selection',
       'Standard text-only copies',
       'Access to community favorites',
@@ -73,7 +73,7 @@ const tiers = [
     price: '$9',
     description: 'For those who want to live an inspired life.',
     features: [
-      'Unlimited AI quotes',
+      'Unlimited quotes',
       'Advanced mood insights',
       'Visual image creator',
       'No watermarks on shares',

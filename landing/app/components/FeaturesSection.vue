@@ -9,7 +9,7 @@
             </p>
         </div>
         <p class="mt-6 text-lg leading-8 text-brand-gray">
-          Harness the power of generative AI to find the perfect words for any moment.
+          Harness the power of timeless wisdom to find the perfect words for any moment.
         </p>
       </div>
       <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
@@ -34,9 +34,9 @@
 <script setup lang="ts">
 const features = [
   {
-    name: 'Personalized AI Wisdom',
+    name: 'Personalized Wisdom',
     description:
-      'Our AI understands context. Whether you need a push to start your day or a gentle word to end it, the quotes are unique to you.',
+      'Timeless insights adapted to your situation. Whether you need a push to start your day or a gentle word to end it, discover what resonates with you.',
     icon: 'lucide:brain-circuit'
   },
   {
@@ -48,7 +48,7 @@ const features = [
   {
     name: 'Visual Creator',
     description:
-      'Transform any generated quote into a stunning, shareable social media post with our built-in designer.',
+      'Transform any quote into a stunning, shareable social media post with our built-in designer.',
     icon: 'lucide:image'
   },
 ]

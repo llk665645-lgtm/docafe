@@ -64,7 +64,7 @@ const testimonials = [
 useHead({
   title: 'MoodQuotes AI - Your Daily Inspiration',
   meta: [
-    { name: 'description', content: 'Generate unique, AI-powered quotes tailored to your mood. Motivation, calm, and wisdom at your fingertips.' }
+    { name: 'description', content: 'Discover unique quotes tailored to your mood. Motivation, calm, and wisdom from the world\'s greatest minds at your fingertips.' }
   ]
 })
 </script>

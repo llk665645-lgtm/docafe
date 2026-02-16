@@ -31,8 +31,8 @@ const steps = [
     description: 'Select your current mood or goal—from motivation to peaceful mindfulness.'
   },
   {
-    title: 'AI Crafts Magic',
-    description: 'Our advanced generative engine creates a unique quote tailored just for you.'
+    title: 'The Spark Emerges',
+    description: 'Our engine selects a unique quote tailored just for you from historical archives.'
   },
   {
     title: 'Share the Spark',
