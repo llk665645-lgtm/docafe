@@ -110,13 +110,47 @@
              </div>
 
              <!-- Footer Actions -->
-             <div class="mt-8 flex justify-center gap-4">
-                <button class="flex items-center gap-2 px-8 py-4 rounded-2xl bg-brand-dark text-white hover:bg-brand-dark/90 transition-all text-sm font-bold shadow-xl">
+             <div class="mt-8 flex flex-wrap justify-center gap-4">
+                <button @click="copyToClipboard" class="flex items-center gap-2 px-8 py-4 rounded-2xl bg-brand-dark text-white hover:bg-brand-dark/90 transition-all text-sm font-bold shadow-xl">
                    <Icon name="lucide:copy" class="size-5 text-primary" />
                    {{ $t('generator.share') }}
                 </button>
+                <button @click="showAuthModal = true" class="flex items-center gap-2 px-8 py-4 rounded-2xl bg-primary text-white hover:bg-primary/90 transition-all text-sm font-bold shadow-xl">
+                   <Icon name="lucide:sparkles" class="size-5 text-white" />
+                   {{ $t('generator.wantMore') }}
+                </button>
              </div>
           </div>
+        </Transition>
+
+        <!-- Auth Modal -->
+        <Transition name="fade">
+           <div v-if="showAuthModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-brand-dark/40 backdrop-blur-sm" @click.self="showAuthModal = false">
+              <div class="w-full max-w-md bg-white rounded-3xl p-8 shadow-2xl relative" @click.stop>
+                 <button @click="showAuthModal = false" class="absolute top-4 right-4 p-2 text-brand-dark/50 hover:text-brand-dark transition-colors">
+                    <Icon name="lucide:x" class="size-6" />
+                 </button>
+
+                 <div class="text-center">
+                    <div class="inline-flex items-center justify-center size-20 rounded-full bg-brand-50 mb-6">
+                       <Icon name="lucide:user-plus" class="size-10 text-primary" />
+                    </div>
+                    <h3 class="text-2xl font-bold text-brand-dark mb-3">{{ $t('auth.register.title') }}</h3>
+                     <p class="text-brand-dark/70 mb-8 leading-relaxed">
+                        {{ $t('auth.register.description') }}
+                     </p>
+                     
+                     <div class="flex flex-col gap-4">
+                        <button @click="navigateToRegister" class="w-full py-4 px-6 rounded-2xl bg-primary text-white font-bold hover:bg-primary-dark transition-all shadow-lg hover:shadow-primary/25">
+                           {{ $t('auth.register.submit') }}
+                        </button>
+                        <button @click="showAuthModal = false" class="text-sm font-medium text-brand-dark/50 hover:text-brand-dark transition-colors">
+                           {{ $t('auth.register.maybeLater') }}
+                        </button>
+                     </div>
+                 </div>
+              </div>
+           </div>
         </Transition>
       </div>
     </div>
@@ -125,8 +159,10 @@
   <script setup lang="ts">
   import { ref, reactive, computed } from 'vue'
   import { useI18n } from 'vue-i18n'
+  import { useRouter } from 'vue-router'
 
   const { t, tm } = useI18n()
+  const router = useRouter()
 
   const form = reactive({
     name: '',
@@ -137,12 +173,27 @@
 
   const isGenerating = ref(false)
   const hasResult = ref(false)
+  const showAuthModal = ref(false)
 
   const result = reactive({
     title: '',
     storyContent: '',
     image: ''
   })
+
+  const navigateToRegister = () => {
+    showAuthModal.value = false
+    router.push('/register')
+  }
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(`${result.title}\n\n${result.storyContent}`)
+      // Could add a toast here
+    } catch (err) {
+      console.error('Failed to copy text: ', err)
+    }
+  }
 
   const themeIcons: Record<string, string> = {
     forest: 'lucide:tree-pine',
