@@ -33,9 +33,9 @@ async function onSubmit(event: Event) {
       <!-- Background Image -->
       <div class="absolute inset-0 bg-zinc-900">
         <img 
-          src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&q=80&w=2070" 
+          src="/images/themes/ai-generated-3d-water.jpg" 
           alt="Magical Story Swirl" 
-          class="h-full w-full object-cover opacity-80 scale-105 animate-pulse-slow"
+          class="h-full w-full object-cover opacity-90 scale-105 animate-pulse-slow"
         />
         <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-900/40 to-transparent" />
       </div>

@@ -12,7 +12,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Switch } from '@/components/ui/switch'
+import { Checkbox } from '@/components/ui/checkbox'
 </script>
 
 <template>
@@ -61,14 +61,14 @@ import { Switch } from '@/components/ui/switch'
                     <span>Email Notifications</span>
                     <span class="font-normal text-muted-foreground text-xs">Receive an email when your story is ready.</span>
                   </Label>
-                  <Switch id="email-notif" :default-checked="true" />
+                  <Checkbox id="email-notif" :checked="true" />
                 </div>
                 <div class="flex items-center justify-between space-x-2">
                   <Label for="public-sharing" class="flex flex-col space-y-1">
                     <span>Community Sharing</span>
                     <span class="font-normal text-muted-foreground text-xs">Allow your stories to be showcased in the gallery.</span>
                   </Label>
-                  <Switch id="public-sharing" />
+                  <Checkbox id="public-sharing" />
                 </div>
               </CardContent>
             </Card>
