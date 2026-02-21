@@ -1,20 +1,15 @@
-<script lang="ts">
-export const iframeHeight = "800px"
-export const description = "A dashboard with sidebar, data table, and analytics cards."
-</script>
-
 <script setup lang="ts">
 import AppSidebar from "@/components/AppSidebar.vue"
-import ChartAreaInteractive from "@/components/ChartAreaInteractive.vue"
 import DataTable from "@/components/DataTable.vue"
-import SectionCards from "@/components/SectionCards.vue"
 import SiteHeader from "@/components/SiteHeader.vue"
 import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar"
+import { Button } from '@/components/ui/button'
+import { IconPlus } from '@tabler/icons-vue'
 
-const data = [
+const cvs = [
   {
     id: 1,
     header: "Frontend Engineer Resume",
@@ -42,26 +37,7 @@ const data = [
     limit: "92% Match",
     reviewer: "AI Assistant",
   },
-  {
-    id: 4,
-    header: "Data Scientist Resume",
-    type: "Data",
-    status: "Draft",
-    target: "Amazon",
-    limit: "76% Match",
-    reviewer: "AI Assistant",
-  },
-  {
-    id: 5,
-    header: "Marketing Specialist CV",
-    type: "Marketing",
-    status: "Completed",
-    target: "Netflix",
-    limit: "89% Match",
-    reviewer: "AI Assistant",
-  },
 ]
-
 </script>
 
 <template>
@@ -75,14 +51,17 @@ const data = [
     <SidebarInset>
       <SiteHeader />
       <div class="flex flex-1 flex-col">
-        <div class="@container/main flex flex-1 flex-col gap-2">
-          <div class="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-            <SectionCards />
-            <div class="px-4 lg:px-6">
-              <ChartAreaInteractive />
+        <div class="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+          <div class="flex items-center justify-between px-4 lg:px-6">
+            <div>
+              <h1 class="text-2xl font-bold tracking-tight">My CVs</h1>
+              <p class="text-muted-foreground">Manage and tailor your professional resumes</p>
             </div>
-            <DataTable :data="data" />
+            <Button>
+              <IconPlus class="mr-2 h-4 w-4" /> Create New CV
+            </Button>
           </div>
+          <DataTable :data="cvs" />
         </div>
       </div>
     </SidebarInset>

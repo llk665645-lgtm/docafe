@@ -28,9 +28,9 @@ import {
 
 const data = {
   user: {
-    name: "Alex Parent",
-    email: "alex@example.com",
-    avatar: "/avatars/parent.jpg",
+    name: "John Doe",
+    email: "john@example.com",
+    avatar: "/avatars/user.jpg",
   },
   navMain: [
     {
@@ -39,48 +39,48 @@ const data = {
       icon: IconDashboard,
     },
     {
-      title: "My Stories",
-      url: "/stories",
+      title: "My CVs",
+      url: "/dashboard/cvs",
       icon: IconFileDescription,
     },
     {
-      title: "Create New",
-      url: "/create",
-      icon: IconPlus,
+      title: "Job Tracker",
+      url: "/dashboard/tracker",
+      icon: IconReport,
     },
     {
-      title: "Children Profiles",
-      url: "/profiles",
-      icon: IconUsers,
+      title: "Cover Letters",
+      url: "/dashboard/letters",
+      icon: IconFileDescription,
     },
     {
-      title: "Library",
-      url: "/library",
-      icon: IconDatabase,
+      title: "ATS Analysis",
+      url: "/dashboard/analysis",
+      icon: IconSparkles,
     },
   ],
   navSecondary: [
     {
       title: "Settings",
-      url: "/settings",
+      url: "/dashboard/settings",
       icon: IconSettings,
     },
     {
       title: "Support",
-      url: "/support",
+      url: "/dashboard/support",
       icon: IconHelp,
     },
   ],
   documents: [
     {
       name: "Subscription",
-      url: "/subscription",
+      url: "/dashboard/subscription",
       icon: IconCreditCard,
     },
     {
-      name: "Activity Log",
-      url: "/activity",
-      icon: IconReport,
+      name: "Resume Tips",
+      url: "/dashboard/tips",
+      icon: IconDatabase,
     },
   ],
 }
@@ -95,11 +95,11 @@ const data = {
             as-child
             class="data-[slot=sidebar-menu-button]:!p-1.5"
           >
-            <NuxtLink to="/dashboard" class="flex items-center gap-2 font-bold text-primary">
-              <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white shadow-lg">
-                <IconSparkles class="size-5" />
+            <NuxtLink to="/dashboard" class="flex items-center gap-3 font-bold">
+              <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white shadow-lg">
+                <IconSparkles class="size-6" />
               </div>
-              <span class="text-base tracking-tight">Story<span class="text-primary">Me</span></span>
+              <span class="text-xl tracking-tight text-foreground">Story<span class="text-primary">Me</span></span>
             </NuxtLink>
           </SidebarMenuButton>
         </SidebarMenuItem>

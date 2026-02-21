@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { IconBrandGoogle, IconBrandGithub } from '@tabler/icons-vue'
+import { IconBrandGoogle, IconBrandGithub, IconSparkles } from '@tabler/icons-vue'
 
 definePageMeta({
   layout: false
@@ -31,26 +31,15 @@ async function onSubmit(event: Event) {
     <div class="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
       <div class="absolute inset-0 bg-zinc-900" />
       <div class="relative z-20 flex items-center text-lg font-medium">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="mr-2 h-6 w-6"
-        >
-          <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
-        </svg>
+        <IconSparkles class="mr-2 h-6 w-6 text-primary" />
         StoryMe
       </div>
       <div class="relative z-20 mt-auto">
         <blockquote class="space-y-2">
           <p class="text-lg">
-            &ldquo;This dashboard has saved me countless hours of work and helped me deliver stunning stories to my children faster than ever before.&rdquo;
+            &ldquo;StoryMe helped me land my dream job at Google by tailoring my experience into a compelling narrative that ATS systems loved.&rdquo;
           </p>
-          <footer class="text-sm">Sofia Davis</footer>
+          <footer class="text-sm">John Doe, Software Engineer</footer>
         </blockquote>
       </div>
     </div>

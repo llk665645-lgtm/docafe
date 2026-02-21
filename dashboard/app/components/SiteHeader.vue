@@ -25,12 +25,12 @@ const pageTitle = computed(() => {
       </h2>
       <div class="ml-auto flex items-center gap-3">
         <Button variant="outline" size="sm" class="hidden sm:flex" as-child>
-           <NuxtLink to="/create">
-             Create magic
+           <NuxtLink to="/dashboard/cvs/new">
+             Create CV
            </NuxtLink>
         </Button>
         <div class="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-[10px] font-bold text-primary">
-          AP
+          JD
         </div>
       </div>
     </div>

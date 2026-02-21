@@ -4,7 +4,7 @@
       <div class="space-y-2">
         <h1 class="text-3xl font-bold">StoryMe Dashboard</h1>
         <p class="text-muted-foreground text-sm">
-          Management portal for StoryMe AI
+          AI-Powered Career & Resume Portal
         </p>
       </div>
       <div class="grid gap-4">
