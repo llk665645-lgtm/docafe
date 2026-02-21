@@ -42,6 +42,45 @@
         },
         "demo": {
             "title": "The Amazing Adventure of [NAME]",
+            "heroNames": {
+                "forest": [
+                    "Oliver the Elf",
+                    "Luna the Forest Spirit",
+                    "Squeaky the Mouse Queen"
+                ],
+                "space": [
+                    "Zorg the Robot",
+                    "Commander Star",
+                    "Nova the Alien"
+                ],
+                "ocean": [
+                    "Marina the Mermaid",
+                    "Bubbles the Dolphin",
+                    "Captain Barnacles"
+                ],
+                "dino": [
+                    "Rexy the T-Rex",
+                    "Topsy the Triceratops",
+                    "Longneck the Brachiosaurus"
+                ],
+                "magic": [
+                    "Sparky the Dragon",
+                    "Merlin the Wizard",
+                    "Flora the Fairy"
+                ],
+                "super": [
+                    "Captain Courage",
+                    "The Silver Blur",
+                    "Super Paws"
+                ]
+            },
+            "variations": {
+                "forest": [
+                    "The sun barely peeked through the tall, whispering trees as [NAME] tiptoed along a hidden forest path. Every step crunched softly on the carpet of golden leaves, and the air smelled of moss and pine. From somewhere above, a gentle rustle hinted at the presence of [HERO], a mysterious friend who only appeared to children with curious hearts.\n\n“Did you hear that?” [NAME] whispered, eyes wide. Tiny lights flickered in the shadows, like fireflies dancing in secret patterns. Somewhere near the sparkling stream, a strange giggle echoed, sending shivers of excitement down their spine. [HERO] emerged from behind a twisted oak, holding a small bag filled with [FAVOURITES].\n\n“You’ve come at just the right moment,” [HERO] said, smiling. “The forest is waking up, and it has secrets to show us. But only the bravest adventurers can follow the hidden trail.”\n\nTogether, they stepped onto the narrow path, each stone shimmering faintly beneath their feet. Birds with golden feathers sang as if they knew a secret, and the wind carried whispers of an ancient magic. Somewhere deep in the forest, something awaited — something that could only be found by those who dared to explore. [NAME] felt a rush of excitement. This was not an ordinary forest. Every leaf, every shadow, and every beam of sunlight promised a discovery unlike any other.",
+                    " [NAME] had always thought the forest behind their home was ordinary, full of tall trees and soft moss. But today, a curious sparkle caught their eye near the old stone bridge. Kneeling closer, they discovered [HERO], a tiny figure with bright eyes, balancing on a log as if it were a tightrope. In their hands were [FAVOURITES], glowing faintly in the morning light.\n\n“Welcome,” [HERO] said, their voice like the rustle of leaves. “I’ve been waiting for someone like you. The forest isn’t what it seems.”\n\nAs [NAME] followed [HERO], the trees seemed to lean closer, as if listening. Strange shapes moved in the shadows — a fox with silvery fur, a squirrel wearing a tiny crown, and a rabbit carrying a lantern. Each creature glanced at them knowingly, as though they were expecting something important.\n\nSuddenly, the path split into three. One trail glowed faintly green, another shimmered with silver light, and the third was covered in golden petals. [HERO] whispered, “One of these paths leads to the Heart of the Forest. But be careful — not everything here is friendly.”\n\nExcitement bubbled in [NAME]’s chest. Something magical was about to happen. The forest was alive, and every step promised a secret waiting to be discovered. The adventure had begun.",
+                    "A soft mist curled around the roots of ancient trees as [NAME] wandered deeper into the forest than ever before. The leaves shimmered like tiny emeralds, and the air was thick with the scent of wildflowers and rain. [HERO] appeared suddenly on a tree branch, swinging down gracefully as if the forest itself had delivered them. In their hands were sparkling [FAVOURITES], twinkling like stars.\n\n“Finally, you’re here!” [HERO] said, with a grin. “The forest has been waiting for us. There’s a place not even the wind can reach, and it only shows itself to those who are ready for adventure.”\n\nStrange noises surrounded them — a gentle hum, the flapping of wings, and the occasional giggle that seemed to come from nowhere. Mushrooms formed tiny circles on the forest floor, glowing faintly with magical light. A path of stones appeared as [NAME] stepped forward, guiding them deeper into the woods.\n\n“Keep your eyes open,” [HERO] whispered. “The forest speaks, if you know how to listen. And today, it has something extraordinary to show us.”\n\nEvery step felt thrilling. The forest seemed alive, as if it were holding its breath, waiting for [NAME] and [HERO] to uncover its hidden wonders. Something wonderful was about to happen — something that would change the way they saw the world forever."
+                ]
+            },
             "starters": {
                 "forest": [
                     "One sunny morning, [NAME] wandered into the magical forest near their home. The trees whispered secrets, and tiny sparkling lights danced around. Suddenly, a talking fox appeared, bowing politely, 'Hello, [NAME], I’ve been waiting for you...'"

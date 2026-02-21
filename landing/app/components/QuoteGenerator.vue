@@ -177,19 +177,38 @@
     
     // 2. Generate Content
     const demo = tm('generator.demo') as any
-    const themeStarters = demo.starters?.[form.theme]
-    const rawStarter = Array.isArray(themeStarters) 
-      ? themeStarters[Math.floor(Math.random() * themeStarters.length)]
-      : (themeStarters || '')
+    const themeVariations = demo.variations?.[form.theme]
+    const heroNames = demo.heroNames?.[form.theme] || ['the Magic Friend']
+    const heroName = Array.isArray(heroNames) 
+      ? heroNames[Math.floor(Math.random() * heroNames.length)]
+      : heroNames
+
+    let storyContent = ''
     
-    const starterText = rawStarter.replace(/\[NAME\]/g, form.name)
+    if (Array.isArray(themeVariations) && themeVariations.length > 0) {
+      // Pick random variation
+      const randomVar = themeVariations[Math.floor(Math.random() * themeVariations.length)]
+      storyContent = randomVar
+        .replace(/\[NAME\]/g, form.name)
+        .replace(/\[HERO\]/g, heroName)
+        .replace(/\[FAVOURITES\]/g, form.favorites)
+    } else {
+      // Use standard starter + template
+      const themeStarters = demo.starters?.[form.theme]
+      const rawStarter = Array.isArray(themeStarters) 
+        ? themeStarters[Math.floor(Math.random() * themeStarters.length)]
+        : (themeStarters || '')
+      
+      const starterText = rawStarter.replace(/\[NAME\]/g, form.name)
+      storyContent = demo.story
+        .replace('[STARTER]', starterText)
+        .replace(/\[NAME\]/g, form.name)
+        .replace(/\[FAVOURITES\]/g, form.favorites)
+        .replace(/\[THEME\]/g, (themes.value as any)[form.theme])
+    }
 
     result.title = demo.title.replace('[NAME]', form.name)
-    result.storyContent = demo.story
-      .replace('[STARTER]', starterText)
-      .replace(/\[NAME\]/g, form.name)
-      .replace(/\[FAVOURITES\]/g, form.favorites)
-      .replace(/\[THEME\]/g, (themes.value as any)[form.theme])
+    result.storyContent = storyContent
 
     // 3. Set Visual (Using local theme images)
     result.image = `/images/themes/${form.theme}.webp`
