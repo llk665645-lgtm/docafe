@@ -26,7 +26,7 @@ export default defineNuxtConfig({
     componentDir: './app/components/ui',
   },
   site: {
-    url: 'https://storyme.ai', // Placeholder, update to actual if known
+    url: 'https://storyme.top', // Placeholder, update to actual if known
     name: 'StoryMe - AI Magical Stories for Kids',
     description: 'Create personalized bedtime stories with AI illustrations for your child in 30 seconds.',
     defaultLocale: 'en',
