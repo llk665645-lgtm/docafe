@@ -222,7 +222,6 @@
             "subtitle": "Save all your created stories in one place",
             "description": "To create more magical stories and save them to your library, please create an account. It only takes a few seconds!",
             "submit": "Sign Up",
-            "maybeLater": "Maybe later",
             "switch": "Already have an account?",
             "action": "Login"
         },

@@ -141,11 +141,8 @@
                      </p>
                      
                      <div class="flex flex-col gap-4">
-                        <button @click="navigateToRegister" class="w-full py-4 px-6 rounded-2xl bg-primary text-white font-bold hover:bg-primary-dark transition-all shadow-lg hover:shadow-primary/25">
+                        <button @click="navigateToLogin" class="w-full py-4 px-6 rounded-2xl bg-primary text-white font-bold hover:bg-primary-dark transition-all shadow-lg hover:shadow-primary/25">
                            {{ $t('auth.register.submit') }}
-                        </button>
-                        <button @click="showAuthModal = false" class="text-sm font-medium text-brand-dark/50 hover:text-brand-dark transition-colors">
-                           {{ $t('auth.register.maybeLater') }}
                         </button>
                      </div>
                  </div>
@@ -181,9 +178,9 @@
     image: ''
   })
 
-  const navigateToRegister = () => {
+  const navigateToLogin = () => {
     showAuthModal.value = false
-    router.push('/register')
+    router.push('/login')
   }
 
   const copyToClipboard = async () => {
