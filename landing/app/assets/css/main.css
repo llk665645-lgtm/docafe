@@ -196,6 +196,41 @@
       transform: translate(2%, -3%) scale(1.03);
     }
   }
+
+  /* Cute Cloud Horizontal Drift */
+  --animate-drift-slow-1: drift-slow-1 120s linear infinite;
+  --animate-drift-slow-2: drift-slow-2 150s linear infinite;
+  --animate-drift-slow-3: drift-slow-3 180s linear infinite;
+
+  @keyframes drift-slow-1 {
+    0% {
+      transform: translateX(-10vw) translateY(0);
+    }
+
+    100% {
+      transform: translateX(110vw) translateY(5vh);
+    }
+  }
+
+  @keyframes drift-slow-2 {
+    0% {
+      transform: translateX(110vw) translateY(0);
+    }
+
+    100% {
+      transform: translateX(-20vw) translateY(-3vh);
+    }
+  }
+
+  @keyframes drift-slow-3 {
+    0% {
+      transform: translateX(-20vw) translateY(0);
+    }
+
+    100% {
+      transform: translateX(110vw) translateY(2vh);
+    }
+  }
 }
 
 /* Story Typography */
