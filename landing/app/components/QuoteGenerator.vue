@@ -103,7 +103,7 @@
              <div class="flex flex-col gap-6">
                  <!-- Illustration Removed -->
                  <div class="prose prose-brand max-w-none">
-                    <p class="text-xl leading-relaxed font-serif italic text-brand-dark first-letter:text-5xl first-letter:font-bold first-letter:mr-3 first-letter:float-left first-letter:text-primary whitespace-pre-wrap">
+                    <p class="story-paragraph">
                        {{ result.storyContent }}
                     </p>
                  </div>
