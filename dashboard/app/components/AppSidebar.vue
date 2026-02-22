@@ -44,7 +44,7 @@ const data = {
       title: "My Stories",
       url: "/dashboard/stories",
       icon: IconFileDescription,
-      badge: "12",
+      badge: "18",
     },
     {
       title: "Children Profiles",
