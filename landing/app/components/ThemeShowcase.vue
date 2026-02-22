@@ -22,7 +22,7 @@
                <span class="text-sm font-bold uppercase tracking-widest">{{ label }}</span>
             </div>
             <h3 class="text-3xl font-serif italic font-bold mb-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
-               Мир {{ label.toLowerCase() }}
+              Мир {{ label.toLowerCase() }}
             </h3>
             
             <button 
@@ -43,9 +43,17 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-const { tm } = useI18n()
+const { t } = useI18n()
 
-const themes = computed(() => (tm('generator.themes') || {}) as Record<string, string>)
+const themeKeys = ['forest', 'space', 'ocean', 'dino', 'magic', 'super']
+
+const themes = computed(() => {
+  const result: Record<string, string> = {}
+  themeKeys.forEach(key => {
+    result[key] = t(`generator.themes.${key}`)
+  })
+  return result
+})
 
 const themeIcons: Record<string, string> = {
   forest: 'lucide:tree-pine',
