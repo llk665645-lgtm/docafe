@@ -165,7 +165,8 @@ const handleSubmit = async () => {
       headers['Content-Type'] = 'application/x-www-form-urlencoded';
     }
 
-    const response = await fetch(`http://127.0.0.1:8000${endpoint}`, {
+    const config = useRuntimeConfig();
+    const response = await fetch(`${config.public.apiBase}${endpoint}`, {
       method: 'POST',
       headers,
       body: body
@@ -194,9 +195,13 @@ const handleSubmit = async () => {
     authStore.setTokens(access_token, refresh_token);
     await authStore.fetchUser();
 
+    // Show success state briefly before redirect
+    isLoading.value = false;
+    
     emit('close');
-    // Instead of dashboard, we stay on home or refresh
-    window.location.reload();
+    
+    // Redirect to dashboard on success
+    navigateTo('/dashboard');
   } catch (e: any) {
     console.error('Auth error:', e);
     error.value = 'Connection error. Is the backend running?';

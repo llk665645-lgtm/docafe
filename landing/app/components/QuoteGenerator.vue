@@ -182,8 +182,9 @@
 
   <script setup lang="ts">
   import { useAuthStore } from '~/stores/auth'
+  import { STORIES_RU, STORIES_EN, THEME_DEMO_IMAGES } from '~/utils/storyDemo'
 
-  const { t } = useI18n()
+  const { t, locale } = useI18n()
   const { triggerAuth } = useAuth()
   const authStore = useAuthStore()
 
@@ -261,9 +262,49 @@
     return form.name.length > 1 && form.favorites.length >= 0
   })
 
+  const generateLocalDemo = () => {
+    const data = locale.value === 'ru' ? STORIES_RU : STORIES_EN
+    const theme = form.theme
+    
+    // Pick random hero and variation
+    const heroes = data.heroNames[theme] || data.heroNames['magic'] || []
+    const variations = data.variations[theme] || data.variations['magic'] || []
+    
+    if (heroes.length === 0 || variations.length === 0) return
+    
+    const randomHero = heroes[Math.floor(Math.random() * heroes.length)] || 'Hero'
+    const randomVariation = variations[Math.floor(Math.random() * variations.length)] || ''
+    
+    // Replace placeholders
+    const story = randomVariation
+      .replace(/\[NAME\]/g, form.name)
+      .replace(/\[HERO\]/g, randomHero)
+      .replace(/\[FAVOURITES\]/g, form.favorites || (locale.value === 'ru' ? 'любимые вещи' : 'favorite things'))
+
+    result.title = t('generator.resultHeader')
+    result.storyContent = story
+    result.image = THEME_DEMO_IMAGES[theme] || THEME_DEMO_IMAGES['magic'] || ''
+    result.is_demo = true
+    hasResult.value = true
+    
+    setTimeout(() => {
+      const el = document.querySelector('.result-content')
+      el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 100)
+  }
+
   async function generateStory() {
     isGenerating.value = true
     
+    // For unauthenticated users, always use local demo
+    if (!authStore.isAuthenticated) {
+      setTimeout(() => {
+        generateLocalDemo()
+        isGenerating.value = false
+      }, 1500)
+      return
+    }
+
     try {
       const headers: Record<string, string> = {
         'Content-Type': 'application/json'
@@ -273,7 +314,8 @@
         headers['Authorization'] = `Bearer ${authStore.accessToken}`
       }
 
-      const response = await fetch('http://127.0.0.1:8000/story/generate', {
+      const config = useRuntimeConfig()
+      const response = await fetch(`${config.public.apiBase}/story/generate`, {
         method: 'POST',
         headers,
         body: JSON.stringify({
@@ -285,8 +327,8 @@
       })
 
       if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.message || 'Failed to generate story')
+        generateLocalDemo()
+        return
       }
 
       const data = await response.json()
@@ -298,14 +340,13 @@
       
       hasResult.value = true
       
-      // Smooth scroll to top of generator
       setTimeout(() => {
         const el = document.querySelector('.result-content')
         el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }, 100)
     } catch (error) {
       console.error('Generation error:', error)
-      alert((error as Error).message)
+      generateLocalDemo()
     } finally {
       isGenerating.value = false
     }

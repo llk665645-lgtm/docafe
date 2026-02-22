@@ -45,8 +45,9 @@ export const useAuthStore = defineStore('auth', {
 
         async fetchUser() {
             if (!this.accessToken) return
+            const config = useRuntimeConfig()
             try {
-                const response = await fetch('http://127.0.0.1:8000/auth/me', {
+                const response = await fetch(`${config.public.apiBase}/auth/me`, {
                     headers: {
                         'Authorization': `Bearer ${this.accessToken}`
                     }
@@ -71,8 +72,9 @@ export const useAuthStore = defineStore('auth', {
 
         async refreshTokens() {
             if (!this.refreshToken) return false
+            const config = useRuntimeConfig()
             try {
-                const response = await fetch('http://127.0.0.1:8000/auth/refresh', {
+                const response = await fetch(`${config.public.apiBase}/auth/refresh`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
