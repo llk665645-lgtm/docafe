@@ -66,32 +66,40 @@
                 </div>
              </div>
 
-             <!-- Price / Action -->
-             <div class="mt-auto pt-8 flex flex-col gap-4">
-                <button
-                  @click="generateStory"
-                  :disabled="isGenerating || !isFormValid"
-                  class="w-full relative group px-8 py-5 rounded-full font-black text-xl overflow-hidden transition-all border border-white/20"
-                  :class="[
-                    isFormValid 
-                      ? 'bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white hover:scale-[1.02] active:scale-95' 
-                      : 'bg-white/10 text-white/40 cursor-not-allowed border border-white/10'
-                  ]"
-                >
-                  <span class="relative z-10 flex items-center justify-center gap-3">
-                    <Icon v-if="isGenerating" name="svg-spinners:90-ring-with-bg" class="size-6" />
-                    <Icon v-else :name="isFormValid ? 'lucide:sparkles' : 'lucide:lock'" class="size-6" />
-                    {{ isGenerating ? $t('generator.processing') : $t('generator.processBtn') }}
-                  </span>
-                  
-                  <!-- Gloss effect for active button -->
-                  <div v-if="isFormValid" class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                </button>
-                <div class="flex items-center justify-center gap-2 text-[10px] text-white/50 font-bold uppercase tracking-widest">
-                   <Icon name="lucide:shield-check" class="size-3 text-emerald-400" />
-                   Secure AI Processing
-                </div>
-             </div>
+              <!-- Price / Action -->
+              <div class="mt-auto pt-8 flex flex-col gap-4">
+                 <div v-if="limitReached" class="p-4 rounded-2xl bg-orange-500/10 border border-orange-500/20 text-orange-200 text-xs font-medium text-center animate-in fade-in slide-in-from-top-2 duration-300">
+                   <div class="flex items-center justify-center gap-2 mb-1">
+                     <Icon name="lucide:alert-circle" class="size-4" />
+                     <span class="font-bold">Limit Reached</span>
+                   </div>
+                   {{ $t('generator.limitReached') }}
+                 </div>
+
+                 <button
+                   @click="generateStory"
+                   :disabled="isGenerating || !isFormValid || (limitReached && !authStore.isAuthenticated)"
+                   class="w-full relative group px-8 py-5 rounded-full font-black text-xl overflow-hidden transition-all border border-white/20"
+                   :class="[
+                     isFormValid && (!limitReached || authStore.isAuthenticated)
+                       ? 'bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white hover:scale-[1.02] active:scale-95' 
+                       : 'bg-white/10 text-white/40 cursor-not-allowed border border-white/10'
+                   ]"
+                 >
+                   <span class="relative z-10 flex items-center justify-center gap-3">
+                     <Icon v-if="isGenerating" name="svg-spinners:90-ring-with-bg" class="size-6" />
+                     <Icon v-else :name="isFormValid && (!limitReached || authStore.isAuthenticated) ? 'lucide:sparkles' : 'lucide:lock'" class="size-6" />
+                     {{ isGenerating ? $t('generator.processing') : $t('generator.processBtn') }}
+                   </span>
+                   
+                   <!-- Gloss effect for active button -->
+                   <div v-if="isFormValid && (!limitReached || authStore.isAuthenticated)" class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                 </button>
+                 <div class="flex items-center justify-center gap-2 text-[10px] text-white/50 font-bold uppercase tracking-widest">
+                    <Icon name="lucide:shield-check" class="size-3 text-emerald-400" />
+                    Secure AI Processing
+                 </div>
+              </div>
           </div>
         </div>
 
@@ -150,7 +158,7 @@
                         <img :src="result.image" alt="Story Illustration" class="w-full h-full object-cover" />
                       </div>
                       <div class="space-y-4">
-                        <p v-for="(p, i) in formattedStory" :key="i" class="story-paragraph !text-white/90 text-lg leading-relaxed">
+                        <p v-for="(p, i) in formattedStory" :key="i" class="story-paragraph">
                            {{ p }}
                         </p>
                       </div>
@@ -293,12 +301,40 @@
     }, 100)
   }
 
+  const limitReached = ref(false)
+  const localGenCount = ref(0)
+
+  onMounted(() => {
+    const saved = localStorage.getItem('story_gen_count')
+    const savedDate = localStorage.getItem('story_gen_date')
+    const today = new Date().toDateString()
+    
+    if (savedDate !== today) {
+      localGenCount.value = 0
+      localStorage.setItem('story_gen_count', '0')
+      localStorage.setItem('story_gen_date', today)
+    } else if (saved) {
+      localGenCount.value = parseInt(saved, 10)
+    }
+  })
+
   async function generateStory() {
+    if (!isFormValid.value) return
+    
+    // Check local limit first for unauthenticated users
+    if (!authStore.isAuthenticated && localGenCount.value >= 3) {
+      limitReached.value = true
+      return
+    }
+
     isGenerating.value = true
+    limitReached.value = false
     
     // For unauthenticated users, always use local demo
     if (!authStore.isAuthenticated) {
       setTimeout(() => {
+        localGenCount.value++
+        localStorage.setItem('story_gen_count', localGenCount.value.toString())
         generateLocalDemo()
         isGenerating.value = false
       }, 1500)
@@ -326,12 +362,17 @@
         })
       })
 
+      const data = await response.json()
+
       if (!response.ok) {
+        if (response.status === 403 && data.error === 'limit_reached') {
+          limitReached.value = true
+          isGenerating.value = false
+          return
+        }
         generateLocalDemo()
         return
       }
-
-      const data = await response.json()
       
       result.title = t('generator.resultHeader')
       result.storyContent = data.story

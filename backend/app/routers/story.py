@@ -1,4 +1,29 @@
-# Тематические изображения для демо-версии (высокое качество с Unsplash)
+import logging
+from datetime import datetime, timezone
+import httpx
+from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel
+
+from app.core.config import settings
+from app.core.security import get_optional_user
+from app.core.database import get_users_collection, get_items_collection
+
+logger = logging.getLogger(__name__)
+router = APIRouter(prefix="/story", tags=["story"])
+
+class StoryRequest(BaseModel):
+    name: str
+    age: int
+    theme: str
+    additional_params: str | None = None
+
+class StoryResponse(BaseModel):
+    story: str
+    image: str
+    is_demo: bool
+
+# Тематические изображения для демо-версии
 THEME_DEMO_IMAGES = {
     "forest": "https://images.unsplash.com/photo-1448375240581-ed3216b38c8c?q=80&w=1200&auto=format&fit=crop",
     "space": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
@@ -22,16 +47,53 @@ THEME_STYLE_MODIFIERS = {
 async def generate_story(data: StoryRequest, user: dict | None = Depends(get_optional_user)):
     """
     Генерация сказки с разграничением доступа:
-    - гость (без токена) или free subscription → демо-версия (статичный контент)
-    - paid → полноценная AI-генерация через GPT-4 и DALL-E 3
+    - гость (без токена) или free subscription → лимит 3 сказки в день
+    - paid → полноценная AI-генерация с дневными лимитами
     """
-    is_paid = user is not None and user.get("subscription_tier") == "paid"
+    # 1. Проверяем лимиты
+    if user and user.get("email") == "admin@example.com":
+        # Admin can always generate
+        pass
+    else:
+        today = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
+        stories_coll = get_items_collection()
+        
+        # Determine limit based on tier
+        tier = user.get("subscription_tier", "free") if user else "free"
+        
+        if tier == "free":
+            limit = 3
+        elif tier == "pro":
+            limit = 10
+        elif tier == "enterprise":
+            limit = 50
+        else:
+            limit = 3 # Default to 3 for safety
+            
+        if user:
+            daily_count = await stories_coll.count_documents({
+                "user_id": str(user["_id"]),
+                "created_at": {"$gte": today}
+            })
+            
+            if daily_count >= limit:
+                error_type = "limit_reached" if tier == "free" else "daily_limit_reached"
+                return JSONResponse(
+                    status_code=403,
+                    content={
+                        "error": error_type,
+                        "message": f"You have reached your {limit}-story daily limit. Please upgrade or come back tomorrow."
+                    }
+                )
+
+    # Determine if we should use AI generation
+    # tier 'paid' was used in previous code, but schema says 'pro'/'enterprise'
+    is_paid = user is not None and user.get("subscription_tier") in ["paid", "pro", "enterprise"]
 
     if not is_paid:
         # Ответ для гостей и бесплатных пользователей (Демо)
         demo_image = THEME_DEMO_IMAGES.get(data.theme, THEME_DEMO_IMAGES["magic"])
         
-        # Мы можем добавить немного персонализации даже в демо, используя имя
         demo_story = (
             f"Жил-был отважный герой по имени {data.name}, которому было всего {data.age} лет. "
             f"Однажды в чудесном мире ({data.theme}), произошло нечто невероятное... "
@@ -41,6 +103,21 @@ async def generate_story(data: StoryRequest, user: dict | None = Depends(get_opt
             "✅ Возможность сохранить сказку в свою библиотеку или распечатать ее.\n\n"
             "Хотите узнать, что случилось дальше? Активируйте магический доступ!"
         )
+        
+        # Save guest/free story if registered
+        if user:
+            stories_coll = get_items_collection()
+            await stories_coll.insert_one({
+                "user_id": str(user["_id"]),
+                "name": data.name,
+                "age": data.age,
+                "theme": data.theme,
+                "story_text": demo_story,
+                "image_url": demo_image,
+                "is_demo": True,
+                "created_at": datetime.now(timezone.utc)
+            })
+
         return StoryResponse(
             story=demo_story,
             image=demo_image,
@@ -48,16 +125,6 @@ async def generate_story(data: StoryRequest, user: dict | None = Depends(get_opt
         )
 
     # ЛОГИКА ДЛЯ ПЛАТНЫХ ПОЛЬЗОВАТЕЛЕЙ
-    today_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    gen_stats = user.get("generation_stats", {})
-    daily_count = gen_stats.get(today_str, 0)
-
-    if daily_count >= 10:
-        raise HTTPException(
-            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
-            detail="Вы достигли ежедневного лимита генераций (10). Приходите завтра!"
-        )
-
     if not settings.OPENAI_API_KEY:
         logger.error("OpenAI API key missing")
         raise HTTPException(status_code=500, detail="Конфигурация AI временно недоступна")
@@ -93,7 +160,6 @@ async def generate_story(data: StoryRequest, user: dict | None = Depends(get_opt
             story_text = text_response.json()["choices"][0]["message"]["content"]
 
             # 2. Попытка генерации уникальной картинки (DALL-E 3)
-            # Если не получится - используем тематический fallback
             image_url = THEME_DEMO_IMAGES.get(data.theme, THEME_DEMO_IMAGES["magic"])
             
             try:
@@ -121,10 +187,25 @@ async def generate_story(data: StoryRequest, user: dict | None = Depends(get_opt
                 image_url = image_response.json()["data"][0]["url"]
             except Exception as e:
                 logger.error(f"Failed to generate unique image: {e}")
-                # Мы не бросаем ошибку, чтобы пользователь хотя бы получил текст сказки
 
-            # 3. Обновление статистики пользователя
+            # 3. Сохранение истории
+            stories_coll = get_items_collection()
+            new_story = {
+                "user_id": str(user["_id"]),
+                "name": data.name,
+                "age": data.age,
+                "theme": data.theme,
+                "additional_params": data.additional_params,
+                "story_text": story_text,
+                "image_url": image_url,
+                "is_demo": False,
+                "created_at": datetime.now(timezone.utc)
+            }
+            await stories_coll.insert_one(new_story)
+
+            # 4. Обновление статистики (для обратной совместимости если нужно)
             users_coll = get_users_collection()
+            today_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
             users_coll.update_one(
                 {"_id": user["_id"]},
                 {"$inc": {f"generation_stats.{today_str}": 1}}

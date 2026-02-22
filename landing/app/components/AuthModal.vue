@@ -34,7 +34,31 @@
             </p>
           </div>
 
-          <form @submit.prevent="handleSubmit" class="space-y-4">
+          <div v-if="successMessage" class="space-y-6 py-4 text-center">
+            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-500/20 text-green-400 border border-green-500/20">
+              <Icon name="lucide:check" class="size-8" />
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-xl font-bold text-white">{{ isLogin ? 'Welcome Back!' : 'Account Created!' }}</h3>
+              <p class="text-sm text-white/60">{{ successMessage }}</p>
+            </div>
+            <div class="flex flex-col gap-3 pt-4">
+              <button 
+                @click="navigateTo('/dashboard'); $emit('close')"
+                class="w-full rounded-2xl bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] py-4 text-sm font-black text-white text-center transition-all hover:scale-[1.02] active:scale-[0.98]"
+              >
+                Go to Dashboard
+              </button>
+              <button 
+                class="text-sm font-bold text-white/40 hover:text-white transition-colors"
+                @click="$emit('close')"
+              >
+                Continue Browsing
+              </button>
+            </div>
+          </div>
+
+          <form v-else @submit.prevent="handleSubmit" class="space-y-4">
             <div v-if="!isLogin" class="space-y-1">
               <label class="text-xs font-bold uppercase tracking-wider text-brand-gray ml-1">{{ $t('auth.form.fullName') }}</label>
               <input 
@@ -84,7 +108,7 @@
             </button>
           </form>
 
-          <div class="mt-8 flex items-center justify-center gap-2 text-sm font-bold">
+          <div v-if="!successMessage" class="mt-8 flex items-center justify-center gap-2 text-sm font-bold">
             <span class="text-white/40">
               {{ isLogin ? $t('auth.login.switch') : $t('auth.register.switch') }}
             </span>
@@ -128,6 +152,7 @@ const emit = defineEmits<{
 const isLogin = ref(props.initialMode === 'login');
 const isLoading = ref(false);
 const error = ref('');
+const successMessage = ref('');
 
 const form = reactive({
   fullName: '',
@@ -142,6 +167,7 @@ watch(() => props.isOpen, (val) => {
   }
   if (!val) {
     error.value = '';
+    successMessage.value = '';
     form.fullName = '';
     form.email = '';
     form.password = '';
@@ -195,13 +221,16 @@ const handleSubmit = async () => {
     authStore.setTokens(access_token, refresh_token);
     await authStore.fetchUser();
 
-    // Show success state briefly before redirect
+    successMessage.value = isLogin.value 
+      ? 'You have successfully logged in!' 
+      : 'Your account has been created successfully!';
+    
+    // Clear form
+    form.fullName = '';
+    form.email = '';
+    form.password = '';
+    
     isLoading.value = false;
-    
-    emit('close');
-    
-    // Redirect to dashboard on success
-    navigateTo('/dashboard');
   } catch (e: any) {
     console.error('Auth error:', e);
     error.value = 'Connection error. Is the backend running?';
