@@ -270,9 +270,7 @@
     result.storyContent = storyContent
     result.image = `/images/themes/${form.theme}.webp`
 
-    // Small delay just for UX feel (0.5s) instead of 3 seconds
-    await new Promise(resolve => setTimeout(resolve, 500))
-    
+    // No delays, show result instantly
     hasResult.value = true
     isGenerating.value = false
   }
