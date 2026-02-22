@@ -162,16 +162,27 @@ const handleSubmit = async () => {
       headers['Content-Type'] = 'application/x-www-form-urlencoded';
     }
 
-    const response = await fetch(`http://localhost:8000${endpoint}`, {
+    const response = await fetch(`http://127.0.0.1:8000${endpoint}`, {
       method: 'POST',
       headers,
       body: body
     });
 
-    const data = await response.json();
+    let data;
+    try {
+      data = await response.json();
+    } catch (parseError) {
+      error.value = 'Server returned an invalid response. Please try again later.';
+      return;
+    }
 
     if (!response.ok) {
       error.value = data.detail || (data.message || 'Authentication failed');
+      return;
+    }
+
+    if (!data.data || !data.data.access_token) {
+      error.value = 'Invalid response format from server';
       return;
     }
 
@@ -184,6 +195,7 @@ const handleSubmit = async () => {
     // Instead of dashboard, we stay on home or refresh
     window.location.reload();
   } catch (e: any) {
+    console.error('Auth error:', e);
     error.value = 'Connection error. Is the backend running?';
   } finally {
     isLoading.value = false;
