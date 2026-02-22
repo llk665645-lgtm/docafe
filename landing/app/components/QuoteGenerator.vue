@@ -228,10 +228,6 @@
   async function generateStory() {
     isGenerating.value = true
     
-    // 1. Simulate Stripe Checkout Delay
-    await new Promise(resolve => setTimeout(resolve, 800))
-    
-    // 2. Generate Content
     const rawDemo = tm('generator.demo')
     const demo = (rawDemo && typeof rawDemo === 'object') ? rawDemo : {} as any
     
@@ -248,14 +244,12 @@
     let storyContent = ''
     
     if (Array.isArray(themeVariations) && themeVariations.length > 0) {
-      // Pick random variation
       const randomVar = themeVariations[Math.floor(Math.random() * themeVariations.length)]
       storyContent = String(randomVar)
         .replace(/\[NAME\]/g, form.name)
         .replace(/\[HERO\]/g, heroName)
         .replace(/\[FAVOURITES\]/g, form.favorites)
     } else {
-      // Use standard starter + template
       const starters = demo.starters || {}
       const themeStarters = starters[form.theme]
       const rawStarter = Array.isArray(themeStarters) 
@@ -274,12 +268,10 @@
     const demoTitle = demo.title || 'The Adventure of [NAME]'
     result.title = String(demoTitle).replace('[NAME]', form.name)
     result.storyContent = storyContent
-
-    // 3. Set Visual (Using local theme images)
     result.image = `/images/themes/${form.theme}.webp`
 
-    // 4. Final Processing Time
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    // Small delay just for UX feel (0.5s) instead of 3 seconds
+    await new Promise(resolve => setTimeout(resolve, 500))
     
     hasResult.value = true
     isGenerating.value = false
