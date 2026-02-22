@@ -1,14 +1,10 @@
 """
-Авторизация: email/пароль и GitHub OAuth.
+Авторизация: email/пароль.
 Все эндпоинты возвращают пару access + refresh токенов.
 """
 from datetime import datetime, timezone
-from urllib.parse import urlencode
-
-import httpx
 from bson import ObjectId
 from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.responses import RedirectResponse
 from fastapi.security import OAuth2PasswordRequestForm
 
 from app.core.config import settings
@@ -154,132 +150,3 @@ async def refresh(data: RefreshRequest):
 async def me(current_user: dict = Depends(get_current_user)):
     """Получить текущего пользователя."""
     return SuccessResponse(data=_doc_to_user(current_user))
-
-
-# ==================== GitHub OAuth ====================
-
-GITHUB_AUTHORIZE_URL = "https://github.com/login/oauth/authorize"
-GITHUB_TOKEN_URL = "https://github.com/login/oauth/access_token"
-GITHUB_USER_URL = "https://api.github.com/user"
-GITHUB_EMAILS_URL = "https://api.github.com/user/emails"
-
-
-@router.get("/github")
-async def github_login():
-    """Редирект на GitHub для OAuth авторизации."""
-    if not settings.GITHUB_CLIENT_ID:
-        raise HTTPException(
-            status_code=status.HTTP_501_NOT_IMPLEMENTED,
-            detail="GitHub OAuth not configured",
-        )
-
-    params = {
-        "client_id": settings.GITHUB_CLIENT_ID,
-        "scope": "user:email",
-    }
-    return RedirectResponse(f"{GITHUB_AUTHORIZE_URL}?{urlencode(params)}")
-
-
-@router.get("/github/callback")
-async def github_callback(code: str | None = None, error: str | None = None):
-    """Callback от GitHub OAuth."""
-    if error:
-        return RedirectResponse(f"{settings.FRONTEND_URL}/auth/error?error={error}")
-
-    if not code:
-        return RedirectResponse(f"{settings.FRONTEND_URL}/auth/error?error=no_code")
-
-    # Обменять code на access_token
-    async with httpx.AsyncClient() as client:
-        token_response = await client.post(
-            GITHUB_TOKEN_URL,
-            data={
-                "client_id": settings.GITHUB_CLIENT_ID,
-                "client_secret": settings.GITHUB_CLIENT_SECRET,
-                "code": code,
-            },
-            headers={"Accept": "application/json"},
-        )
-        token_data = token_response.json()
-
-    if "access_token" not in token_data:
-        return RedirectResponse(
-            f"{settings.FRONTEND_URL}/auth/error?error=token_exchange_failed"
-        )
-
-    github_token = token_data["access_token"]
-
-    # Получить данные пользователя
-    async with httpx.AsyncClient() as client:
-        headers = {
-            "Authorization": f"Bearer {github_token}",
-            "Accept": "application/json",
-        }
-        user_response = await client.get(GITHUB_USER_URL, headers=headers)
-        github_user = user_response.json()
-
-        emails_response = await client.get(GITHUB_EMAILS_URL, headers=headers)
-        emails = emails_response.json()
-
-    # Найти primary email
-    email = None
-    if isinstance(emails, list):
-        for e in emails:
-            if e.get("primary") and e.get("verified"):
-                email = e["email"]
-                break
-        if not email and emails:
-            email = emails[0].get("email")
-
-    if not email:
-        email = github_user.get("email")
-
-    if not email:
-        return RedirectResponse(
-            f"{settings.FRONTEND_URL}/auth/error?error=no_email"
-        )
-
-    github_id = str(github_user["id"])
-    users = get_users_collection()
-
-    user = users.find_one({"github_id": github_id})
-    if not user:
-        user = users.find_one({"email": email})
-
-    now = datetime.now(timezone.utc)
-
-    if user:
-        users.update_one(
-            {"_id": user["_id"]},
-            {
-                "$set": {
-                    "github_id": github_id,
-                    "full_name": github_user.get("name") or user.get("full_name"),
-                    "avatar_url": github_user.get("avatar_url"),
-                    "last_login": now,
-                    "updated_at": now,
-                }
-            },
-        )
-        user_id = str(user["_id"])
-    else:
-        user_doc = {
-            "email": email,
-            "password_hash": None,
-            "full_name": github_user.get("name"),
-            "avatar_url": github_user.get("avatar_url"),
-            "provider": "github",
-            "github_id": github_id,
-            "subscription_tier": "free",
-            "last_login": now,
-            "created_at": now,
-            "updated_at": now,
-        }
-        result = users.insert_one(user_doc)
-        user_id = str(result.inserted_id)
-
-    access, refresh_tok = create_token_pair(user_id)
-
-    return RedirectResponse(
-        f"{settings.FRONTEND_URL}/auth/callback?access_token={access}&refresh_token={refresh_tok}"
-    )

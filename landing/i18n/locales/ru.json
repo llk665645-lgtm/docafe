@@ -5,7 +5,6 @@
         "howItWorks": "Как это работает",
         "login": "Войти",
         "getStarted": "Создать сказку",
-        "dashboard": "Панель управления",
         "about": "О нас",
         "blog": "Блог"
     },
@@ -272,8 +271,7 @@
             "fullNamePlaceholder": "Имя Фамилия",
             "email": "Электронная почта",
             "emailPlaceholder": "parent{'@'}example.com",
-            "password": "Пароль",
-            "social": "Или через"
+            "password": "Пароль"
         }
     },
     "about": {

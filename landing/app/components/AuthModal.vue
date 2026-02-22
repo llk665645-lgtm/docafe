@@ -38,7 +38,9 @@
             <div v-if="!isLogin" class="space-y-1">
               <label class="text-xs font-bold uppercase tracking-wider text-brand-gray ml-1">{{ $t('auth.form.fullName') }}</label>
               <input 
+                v-model="form.fullName"
                 type="text" 
+                required
                 :placeholder="$t('auth.form.fullNamePlaceholder')"
                 class="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white transition-all focus:border-purple-400 focus:ring-4 focus:ring-purple-500/10 placeholder:text-white/30 outline-none"
               />
@@ -47,7 +49,9 @@
             <div class="space-y-1">
               <label class="text-xs font-bold uppercase tracking-wider text-brand-gray ml-1">{{ $t('auth.form.email') }}</label>
               <input 
+                v-model="form.email"
                 type="email" 
+                required
                 :placeholder="$t('auth.form.emailPlaceholder')"
                 class="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white transition-all focus:border-purple-400 focus:ring-4 focus:ring-purple-500/10 placeholder:text-white/30 outline-none"
               />
@@ -56,17 +60,26 @@
             <div class="space-y-1">
               <label class="text-xs font-bold uppercase tracking-wider text-brand-gray ml-1">{{ $t('auth.form.password') }}</label>
               <input 
+                v-model="form.password"
                 type="password" 
+                required
                 placeholder="••••••••"
                 class="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white transition-all focus:border-purple-400 focus:ring-4 focus:ring-purple-500/10 placeholder:text-white/30 outline-none"
               />
             </div>
 
+            <p v-if="error" class="text-red-400 text-xs font-bold px-1 mt-2">
+              {{ error }}
+            </p>
+
             <button 
               type="submit"
-              class="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] py-4 text-sm font-black text-white shadow-[0_8px_30px_rgba(139,92,246,0.3)] transition-all hover:scale-[1.02] active:scale-[0.98] border border-white/20"
+              :disabled="isLoading"
+              class="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] py-4 text-sm font-black text-white shadow-[0_8px_30px_rgba(139,92,246,0.3)] transition-all hover:scale-[1.02] active:scale-[0.98] border border-white/20 disabled:opacity-50 disabled:scale-100"
             >
-              <span class="relative z-10">{{ isLogin ? $t('auth.login.submit') : $t('auth.register.submit') }}</span>
+              <span class="relative z-10">
+                {{ isLoading ? 'Processing...' : (isLogin ? $t('auth.login.submit') : $t('auth.register.submit')) }}
+              </span>
               <div class="absolute inset-0 -z-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
             </button>
           </form>
@@ -77,28 +90,9 @@
             </span>
             <button 
               class="text-purple-400 hover:text-purple-300 transition-colors"
-              @click="isLogin = !isLogin"
+              @click="isLogin = !isLogin; error = ''"
             >
               {{ isLogin ? $t('auth.login.action') : $t('auth.register.action') }}
-            </button>
-          </div>
-        </div>
-
-        <!-- Social Auth -->
-        <div class="bg-white/[0.03] border-t border-white/10 px-8 py-8">
-          <div class="flex items-center gap-3">
-             <div class="h-px flex-1 bg-white/10" />
-             <span class="text-[10px] font-black uppercase tracking-widest text-white/40">{{ $t('auth.form.social') }}</span>
-             <div class="h-px flex-1 bg-white/10" />
-          </div>
-          <div class="mt-6 grid grid-cols-2 gap-4">
-            <button class="flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 py-3 text-xs font-black text-white hover:bg-white/10 transition-all">
-              <Icon name="logos:google-icon" class="size-4" />
-              Google
-            </button>
-            <button class="flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 py-3 text-xs font-black text-white hover:bg-white/10 transition-all">
-              <Icon name="logos:github-icon" class="size-4" />
-              GitHub
             </button>
           </div>
         </div>
@@ -116,7 +110,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, reactive, watch } from 'vue';
 import { Motion, AnimatePresence } from 'motion-v';
 
 const props = defineProps<{
@@ -129,19 +123,70 @@ const emit = defineEmits<{
 }>();
 
 const isLogin = ref(props.initialMode === 'login');
+const isLoading = ref(false);
+const error = ref('');
+
+const form = reactive({
+  fullName: '',
+  email: '',
+  password: ''
+});
 
 // Sync mode when modal opens if provided
 watch(() => props.isOpen, (val) => {
   if (val && props.initialMode) {
     isLogin.value = props.initialMode === 'login';
   }
+  if (!val) {
+    error.value = '';
+    form.fullName = '';
+    form.email = '';
+    form.password = '';
+  }
 });
 
-const handleSubmit = () => {
-  // Simulate auth delay
-  setTimeout(() => {
+const handleSubmit = async () => {
+  isLoading.value = true;
+  error.value = '';
+  
+  try {
+    const endpoint = isLogin.value ? '/auth/login' : '/auth/register';
+    const body = isLogin.value 
+      ? new URLSearchParams({ username: form.email, password: form.password })
+      : JSON.stringify({ email: form.email, password: form.password, full_name: form.fullName });
+    
+    const headers: Record<string, string> = {};
+    if (!isLogin.value) {
+      headers['Content-Type'] = 'application/json';
+    } else {
+      headers['Content-Type'] = 'application/x-www-form-urlencoded';
+    }
+
+    const response = await fetch(`http://localhost:8000${endpoint}`, {
+      method: 'POST',
+      headers,
+      body: body
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      error.value = data.detail || (data.message || 'Authentication failed');
+      return;
+    }
+
+    // Store tokens
+    const { access_token, refresh_token } = data.data;
+    localStorage.setItem('access_token', access_token);
+    localStorage.setItem('refresh_token', refresh_token);
+
     emit('close');
-    navigateTo('/dashboard');
-  }, 500);
+    // Instead of dashboard, we stay on home or refresh
+    window.location.reload();
+  } catch (e: any) {
+    error.value = 'Connection error. Is the backend running?';
+  } finally {
+    isLoading.value = false;
+  }
 };
 </script>

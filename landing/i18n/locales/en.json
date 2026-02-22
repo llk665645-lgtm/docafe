@@ -5,7 +5,6 @@
         "howItWorks": "How it works",
         "login": "Login",
         "getStarted": "Create Story",
-        "dashboard": "Dashboard",
         "about": "About",
         "blog": "Blog"
     },
@@ -276,8 +275,7 @@
             "fullNamePlaceholder": "John Doe",
             "email": "Email Address",
             "emailPlaceholder": "parent{'@'}example.com",
-            "password": "Password",
-            "social": "Or via"
+            "password": "Password"
         }
     },
     "about": {

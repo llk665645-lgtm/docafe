@@ -32,10 +32,6 @@ class Settings(BaseSettings):
     JWT_REFRESH_SECRET: str = "change-me-refresh-in-production"
     JWT_REFRESH_EXPIRE_DAYS: int = 30  # 30 дней
 
-    # GitHub OAuth
-    GITHUB_CLIENT_ID: str = ""
-    GITHUB_CLIENT_SECRET: str = ""
-
     # Frontend URL для редиректа после OAuth
     FRONTEND_URL: str = "http://localhost:3000"
 
