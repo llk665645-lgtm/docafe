@@ -53,44 +53,26 @@ const data = {
       title: "Children Profiles",
       url: "/dashboard/profiles",
       icon: IconUsers,
-      badge: "3",
     },
     {
       title: "Fairytale Themes",
       url: "/dashboard/themes",
       icon: IconSparkles,
-      badge: "6",
     },
-    {
-      title: "Gallery",
-      url: "/dashboard/gallery",
-      icon: IconPhoto,
-    },
-  ],
-  navSecondary: [
     {
       title: "Settings",
       url: "/dashboard/settings",
       icon: IconSettings,
     },
+  ],
+  navSecondary: [
     {
       title: "Support",
       url: "/dashboard/support",
       icon: IconHelp,
     },
   ],
-  documents: [
-    {
-      name: "Subscription",
-      url: "/dashboard/subscription",
-      icon: IconCreditCard,
-    },
-    {
-      name: "Storytelling Tips",
-      url: "/dashboard/tips",
-      icon: IconBulb,
-    },
-  ],
+  documents: [],
 }
 </script>
 

@@ -19,8 +19,8 @@ import {
     <DreamBackground />
     <AppSidebar variant="inset" class="bg-transparent" />
     <SidebarInset class="bg-transparent min-h-screen">
-      <SiteHeader class="bg-transparent backdrop-blur-md border-white/5" />
-      <div class="flex-1 overflow-auto bg-white/5 backdrop-blur-sm">
+      <SiteHeader class="bg-transparent sticky top-0 z-30" />
+      <div class="flex-1 overflow-auto">
         <slot />
       </div>
     </SidebarInset>

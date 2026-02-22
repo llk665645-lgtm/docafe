@@ -13,7 +13,7 @@ import {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 gap-4 px-4 lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4 *:data-[slot=card]:bg-white/5 *:data-[slot=card]:backdrop-blur-md *:data-[slot=card]:border-white/10 *:data-[slot=card]:shadow-xl *:data-[slot=card]:transition-all *:data-[slot=card]:duration-300 hover:*:data-[slot=card]:bg-white/10">
+  <div class="grid grid-cols-1 gap-4 px-4 lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4 *:data-[slot=card]:bg-white/5 *:data-[slot=card]:border-white/5 *:data-[slot=card]:shadow-md">
     <Card class="@container/card">
       <CardHeader>
         <CardDescription>Stories Created</CardDescription>
