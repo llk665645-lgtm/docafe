@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppSidebar from "@/components/AppSidebar.vue"
 import SiteHeader from "@/components/SiteHeader.vue"
+import DreamBackground from "@/components/DreamBackground.vue"
 import {
   SidebarInset,
   SidebarProvider,
@@ -9,15 +10,19 @@ import {
 
 <template>
   <SidebarProvider
+    class="bg-transparent"
     :style=" {
       '--sidebar-width': 'calc(var(--spacing) * 72)',
       '--header-height': 'calc(var(--spacing) * 12)',
     }"
   >
-    <AppSidebar variant="inset" />
-    <SidebarInset>
-      <SiteHeader />
-      <slot />
+    <DreamBackground />
+    <AppSidebar variant="inset" class="bg-transparent" />
+    <SidebarInset class="bg-transparent min-h-screen">
+      <SiteHeader class="bg-transparent backdrop-blur-md border-white/5" />
+      <div class="flex-1 overflow-auto bg-white/5 backdrop-blur-sm">
+        <slot />
+      </div>
     </SidebarInset>
   </SidebarProvider>
 </template>

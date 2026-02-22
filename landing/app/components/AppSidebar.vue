@@ -10,6 +10,8 @@ import {
   IconPlus,
   IconCreditCard,
   IconSparkles,
+  IconPhoto,
+  IconBulb,
 } from "@tabler/icons-vue"
 
 import LogoIcon from '@/components/LogoIcon.vue'
@@ -62,7 +64,7 @@ const data = {
     {
       title: "Gallery",
       url: "/dashboard/gallery",
-      icon: IconDatabase,
+      icon: IconPhoto,
     },
   ],
   navSecondary: [
@@ -86,14 +88,14 @@ const data = {
     {
       name: "Storytelling Tips",
       url: "/dashboard/tips",
-      icon: IconDatabase,
+      icon: IconBulb,
     },
   ],
 }
 </script>
 
 <template>
-  <Sidebar collapsible="offcanvas">
+  <Sidebar collapsible="offcanvas" class="bg-transparent border-white/5">
     <SidebarHeader>
       <SidebarMenu>
         <SidebarMenuItem>
